@@ -1,0 +1,34 @@
+<%
+  const memberSince = new Date(user.createdAt).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+%>
+<div class="page-header">
+  <h1>Dashboard</h1>
+  <p class="page-header__lead">Hello, <strong><%= user.fullName %></strong>. This page is only visible to logged-in users.</p>
+</div>
+
+<div class="card-grid card-grid--2">
+  <section class="card" aria-labelledby="profile-title">
+    <h2 id="profile-title" class="card__title">Your profile</h2>
+    <dl class="data-list">
+      <div><dt>Full name</dt><dd><%= user.fullName %></dd></div>
+      <div><dt>Email</dt><dd><%= user.email %></dd></div>
+      <div><dt>Account status</dt><dd><span class="badge badge-success">Active</span></dd></div>
+      <div><dt>Member since</dt><dd><time datetime="<%= user.createdAt %>"><%= memberSince %></time></dd></div>
+    </dl>
+  </section>
+
+  <section class="card" aria-labelledby="privacy-title">
+    <h2 id="privacy-title" class="card__title">Your privacy</h2>
+    <p>Current cookie preferences on this device:</p>
+    <ul class="consent-summary" data-consent-summary>
+      <li>Strictly necessary: <strong>Always on</strong></li>
+      <li>Analytics: <strong data-consent-value="analytics">Not set</strong></li>
+      <li>Marketing: <strong data-consent-value="marketing">Not set</strong></li>
+    </ul>
+    <p><a class="btn btn-outline btn-sm" href="/cookies#manage" data-open-cookie-settings>Change cookie settings</a></p>
+    <p class="text-muted small">
+      Want a copy of your data or your account deleted? Email
+      <a href="mailto:<%= contactEmail %>"><%= contactEmail %></a> (see the <a href="/privacy">Privacy Policy</a>).
+    </p>
+  </section>
+</div>

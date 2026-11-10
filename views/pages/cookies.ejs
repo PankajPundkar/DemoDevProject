@@ -1,0 +1,84 @@
+<article class="prose">
+  <h1>Cookie Policy</h1>
+  <p class="text-muted">Policy version <%= cookiePolicyVersion %>. This policy explains what cookies are, which ones <%= siteName %> uses, and how you can control them.</p>
+
+  <h2>What are cookies?</h2>
+  <p>
+    Cookies are small text files that a website stores in your browser. Some are essential for the site
+    to work (for example, to keep you logged in). Others are optional and are used for things like
+    statistics or advertising. Under the EU ePrivacy Directive and the GDPR we may only set optional
+    cookies after you have actively agreed to them.
+  </p>
+
+  <h2>How we ask for consent</h2>
+  <ul>
+    <li>On your first visit we show a banner with three equal choices: <strong>Accept all</strong>, <strong>Reject non-essential</strong> and <strong>Customize</strong>.</li>
+    <li>Optional categories are <strong>switched off by default</strong> - nothing is pre-ticked.</li>
+    <li>Scrolling, clicking elsewhere or ignoring the banner is <strong>not</strong> treated as consent.</li>
+    <li>No analytics or advertising scripts are loaded until you allow the matching category.</li>
+    <li>If you reject optional cookies, the whole site still works normally.</li>
+  </ul>
+
+  <h2>Cookies we use</h2>
+  <% cookieCatalog.forEach((cat) => { %>
+    <section class="policy-category">
+      <h3>
+        <%= cat.title %>
+        <span class="badge <%= cat.required ? 'badge-neutral' : 'badge-optional' %>"><%= cat.required ? 'Essential - no consent needed' : 'Optional - requires consent' %></span>
+      </h3>
+      <p><%= cat.description %></p>
+      <div class="table-wrap">
+        <table class="table">
+          <caption class="visually-hidden"><%= cat.title %> cookies</caption>
+          <thead>
+            <tr><th scope="col">Name</th><th scope="col">Purpose</th><th scope="col">Duration</th><th scope="col">Provider</th></tr>
+          </thead>
+          <tbody>
+            <% cat.cookies.forEach((c) => { %>
+              <tr>
+                <td data-label="Name"><code><%= c.name %></code></td>
+                <td data-label="Purpose"><%= c.purpose %></td>
+                <td data-label="Duration"><%= c.duration %></td>
+                <td data-label="Provider"><%= c.provider %></td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  <% }) %>
+
+  <p class="text-muted small">
+    In this demo the analytics and marketing "providers" are simulated local scripts
+    (<code>/js/vendor/</code>) that only set a cookie and write to the browser console. They stand in for
+    real third-party tools to show that nothing loads before consent.
+  </p>
+
+  <h2 id="manage">How to change or withdraw your consent</h2>
+  <p>
+    You can change your choices at any time, and withdrawing consent is as easy as giving it.
+    Use the <strong>Cookie Settings</strong> link in the footer of every page, or the button below.
+    When you withdraw consent we delete the related optional cookies straight away; scripts that were
+    already running stop completely the next time a page loads.
+  </p>
+  <p>
+    <button type="button" class="btn btn-primary" data-open-cookie-settings>Open cookie settings</button>
+  </p>
+  <noscript>
+    <p class="alert alert-info">JavaScript is disabled, so no optional cookies can be set and the settings panel is unavailable. Only strictly necessary cookies are used.</p>
+  </noscript>
+  <p>
+    You can also delete or block cookies in your browser settings. Blocking strictly necessary cookies
+    will prevent you from logging in.
+  </p>
+  <p>
+    We keep an anonymous record of each consent decision (a random ID, your choices, the policy version
+    and a timestamp - no IP address) so that we can demonstrate consent as required by GDPR Article 7.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>If we change the cookies we use, we update the policy version and ask for your consent again.</p>
+
+  <h2>Contact</h2>
+  <p>Questions? Email <a href="mailto:<%= contactEmail %>"><%= contactEmail %></a>.</p>
+</article>

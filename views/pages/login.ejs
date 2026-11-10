@@ -1,0 +1,30 @@
+<section class="auth-wrapper">
+  <div class="card auth-card">
+    <h1 class="auth-card__title">Log in</h1>
+    <p class="auth-card__subtitle">Welcome back. Enter your details to access your dashboard.</p>
+
+    <% if (locals.formError) { %>
+      <div class="alert alert-error" role="alert" id="form-error"><%= formError %></div>
+    <% } %>
+
+    <form method="post" action="/login" class="form" data-validate="login" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+      <%- include('../partials/form-field', {
+        name: 'email', label: 'Email address', type: 'email', autocomplete: 'email',
+        value: values.email, error: errors.email, maxlength: 254
+      }) %>
+
+      <%- include('../partials/form-field', {
+        name: 'password', label: 'Password', type: 'password', autocomplete: 'current-password',
+        error: errors.password
+      }) %>
+
+      <p class="form-required-note"><span class="required" aria-hidden="true">*</span> Required field</p>
+
+      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+    </form>
+
+    <p class="auth-card__footer">Don't have an account? <a href="/register">Create one</a></p>
+  </div>
+</section>

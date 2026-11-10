@@ -1,0 +1,26 @@
+node_modules/
+dist/
+coverage/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data (never commit real user data or sessions)
+data/sessions.json
+data/*.tmp
+data/*.corrupt-*
+# users.json and cookie-consent.json are committed only as empty templates.
+# To stop tracking local changes after cloning, run:
+#   git update-index --skip-worktree data/users.json data/cookie-consent.json
+
+# Test artifacts
+tests/.tmp/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

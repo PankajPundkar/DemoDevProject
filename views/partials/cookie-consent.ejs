@@ -1,0 +1,74 @@
+<%#
+  Cookie consent UI. Hidden by default; public/js/cookie-consent.js shows the banner
+  only when no valid consent cookie exists. Nothing optional runs before a choice.
+  "Accept all" and "Reject non-essential" are styled with equal prominence on purpose
+  (regulators consider a hidden/weaker "reject" option a dark pattern).
+%>
+<section id="cookie-banner" class="cookie-banner" aria-labelledby="cookie-banner-title" hidden>
+  <div class="cookie-banner__inner">
+    <div class="cookie-banner__text">
+      <h2 id="cookie-banner-title" class="cookie-banner__title">Your privacy choices</h2>
+      <p>
+        We use <strong>strictly necessary cookies</strong> to keep you logged in and protect forms.
+        With your permission, we'd also like to use <strong>analytics</strong> and <strong>marketing</strong> cookies.
+        Optional cookies stay off unless you turn them on. You can change your mind at any time via
+        "Cookie Settings" in the footer. <a href="/cookies">Read our Cookie Policy</a>.
+      </p>
+    </div>
+    <div class="cookie-banner__actions">
+      <button type="button" class="btn btn-primary" data-consent-action="reject">Reject non-essential</button>
+      <button type="button" class="btn btn-primary" data-consent-action="accept">Accept all</button>
+      <button type="button" class="btn btn-outline" data-consent-action="customize">Customize</button>
+    </div>
+  </div>
+</section>
+
+<dialog id="cookie-preferences" class="cookie-dialog" aria-labelledby="cookie-dialog-title">
+  <form id="cookie-preferences-form" class="cookie-dialog__form">
+    <div class="cookie-dialog__header">
+      <h2 id="cookie-dialog-title">Cookie preferences</h2>
+      <button type="button" class="cookie-dialog__close" data-consent-action="close" aria-label="Close without saving">&times;</button>
+    </div>
+
+    <div class="cookie-dialog__body">
+      <p>
+        Choose which optional cookies you allow. Strictly necessary cookies are always on because the site
+        cannot work without them. Your choice is stored for <%= consentMaxAgeDays %> days in the
+        <code><%= consentCookieName %></code> cookie.
+      </p>
+
+      <% cookieCatalog.forEach((cat) => { %>
+        <fieldset class="cookie-category">
+          <legend class="visually-hidden"><%= cat.title %> cookies</legend>
+          <div class="cookie-category__head">
+            <label class="switch" for="consent-<%= cat.id %>">
+              <input type="checkbox" id="consent-<%= cat.id %>" name="<%= cat.id %>"
+                <% if (cat.required) { %>checked disabled aria-describedby="consent-<%= cat.id %>-desc"<% } else { %>aria-describedby="consent-<%= cat.id %>-desc"<% } %>>
+              <span class="switch__track" aria-hidden="true"></span>
+              <span class="switch__label"><%= cat.title %></span>
+            </label>
+            <span class="badge <%= cat.required ? 'badge-neutral' : 'badge-optional' %>"><%= cat.required ? 'Always active' : 'Optional' %></span>
+          </div>
+          <p id="consent-<%= cat.id %>-desc" class="cookie-category__desc"><%= cat.description %></p>
+          <details class="cookie-category__details">
+            <summary>Cookies in this category (<%= cat.cookies.length %>)</summary>
+            <ul class="cookie-list">
+              <% cat.cookies.forEach((c) => { %>
+                <li>
+                  <code><%= c.name %></code> - <%= c.purpose %>
+                  <span class="cookie-list__meta">Duration: <%= c.duration %> · Provider: <%= c.provider %></span>
+                </li>
+              <% }) %>
+            </ul>
+          </details>
+        </fieldset>
+      <% }) %>
+    </div>
+
+    <div class="cookie-dialog__actions">
+      <button type="button" class="btn btn-secondary" data-consent-action="reject">Reject non-essential</button>
+      <button type="button" class="btn btn-secondary" data-consent-action="accept">Accept all</button>
+      <button type="submit" class="btn btn-primary">Save my choices</button>
+    </div>
+  </form>
+</dialog>

@@ -1,0 +1,45 @@
+<section class="auth-wrapper">
+  <div class="card auth-card">
+    <h1 class="auth-card__title">Create your account</h1>
+    <p class="auth-card__subtitle">Your account is activated immediately - no email verification needed.</p>
+
+    <% if (locals.formError) { %>
+      <div class="alert alert-error" role="alert" id="form-error"><%= formError %></div>
+    <% } %>
+
+    <form method="post" action="/register" class="form" data-validate="register" novalidate>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+      <%- include('../partials/form-field', {
+        name: 'fullName', label: 'Full name', type: 'text', autocomplete: 'name',
+        value: values.fullName, error: errors.fullName, maxlength: 100
+      }) %>
+
+      <%- include('../partials/form-field', {
+        name: 'email', label: 'Email address', type: 'email', autocomplete: 'email',
+        value: values.email, error: errors.email, maxlength: 254
+      }) %>
+
+      <%- include('../partials/form-field', {
+        name: 'password', label: 'Password', type: 'password', autocomplete: 'new-password',
+        error: errors.password, minlength: 8,
+        hint: 'At least 8 characters, including at least one letter and one number.'
+      }) %>
+
+      <%- include('../partials/form-field', {
+        name: 'confirmPassword', label: 'Confirm password', type: 'password', autocomplete: 'new-password',
+        error: errors.confirmPassword
+      }) %>
+
+      <p class="form-required-note"><span class="required" aria-hidden="true">*</span> Required field</p>
+      <p class="form-privacy-note">
+        By creating an account you agree to our <a href="/terms">Terms of Use</a>.
+        We process your name and email to provide your account - see our <a href="/privacy">Privacy Policy</a>.
+      </p>
+
+      <button type="submit" class="btn btn-primary btn-block">Create account</button>
+    </form>
+
+    <p class="auth-card__footer">Already have an account? <a href="/login">Log in</a></p>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+<section class="hero">
+  <div class="hero__content">
+    <p class="eyebrow">Demo project</p>
+    <h1 class="hero__title">Secure sign-in and privacy-first cookies, without a database.</h1>
+    <p class="hero__lead">
+      <%= siteName %> is a small, complete reference website built with Express, TypeScript and plain
+      HTML/CSS/JavaScript. It demonstrates registration, login, protected pages and a GDPR-aware cookie
+      consent flow - with all data stored in simple JSON files.
+    </p>
+
+    <div class="hero__actions">
+      <% if (locals.currentUser) { %>
+        <a class="btn btn-primary btn-lg" href="/dashboard">Go to your dashboard</a>
+        <form method="post" action="/logout" class="inline-form">
+          <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+          <button type="submit" class="btn btn-outline btn-lg">Log out</button>
+        </form>
+      <% } else { %>
+        <a class="btn btn-primary btn-lg" href="/register">Create a free account</a>
+        <a class="btn btn-outline btn-lg" href="/login">Log in</a>
+      <% } %>
+    </div>
+    <% if (locals.currentUser) { %>
+      <p class="hero__signed-in">Signed in as <strong><%= currentUser.fullName %></strong>.</p>
+    <% } %>
+  </div>
+  <div class="hero__art" aria-hidden="true">
+    <img src="/images/hero.svg" alt="" width="420" height="320">
+  </div>
+</section>
+
+<section class="features" aria-labelledby="features-title">
+  <h2 id="features-title" class="section-title">What this demo shows</h2>
+  <div class="card-grid">
+    <article class="card">
+      <div class="card__icon" aria-hidden="true">🔐</div>
+      <h3 class="card__title">Secure authentication</h3>
+      <p>Passwords hashed with bcrypt, server-side sessions in HttpOnly cookies, session rotation on login and generic error messages.</p>
+    </article>
+    <article class="card">
+      <div class="card__icon" aria-hidden="true">🛡️</div>
+      <h3 class="card__title">Defence in depth</h3>
+      <p>CSRF tokens on every form, login throttling, a strict Content Security Policy and validation on both client and server.</p>
+    </article>
+    <article class="card">
+      <div class="card__icon" aria-hidden="true">🍪</div>
+      <h3 class="card__title">GDPR cookie consent</h3>
+      <p>No optional cookies or tracking scripts until you say so. Accept, reject or customise - and change your mind any time.</p>
+    </article>
+    <article class="card">
+      <div class="card__icon" aria-hidden="true">🗂️</div>
+      <h3 class="card__title">JSON file storage</h3>
+      <p>No database: users and consent records live in JSON files, written atomically and protected against concurrent writes.</p>
+    </article>
+  </div>
+</section>

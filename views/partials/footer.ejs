@@ -1,0 +1,40 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-about">
+      <a class="brand brand--footer" href="/">
+        <img src="/images/logo.svg" alt="" width="28" height="28">
+        <span><%= siteName %></span>
+      </a>
+      <p class="footer-note">
+        This is a demo site. We only process the personal data you enter when registering
+        (name and email) to run your account. Questions about your data?
+        Contact <a href="mailto:<%= contactEmail %>"><%= contactEmail %></a>.
+      </p>
+    </div>
+
+    <nav class="footer-col" aria-label="Site links">
+      <h2 class="footer-heading">Site</h2>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/login">Login</a></li>
+        <li><a href="/register">Register</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-col" aria-label="Legal links">
+      <h2 class="footer-heading">Legal</h2>
+      <ul>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/cookies">Cookie Policy</a></li>
+        <li><a href="/terms">Terms of Use</a></li>
+        <%# Works without JS (goes to the policy page); with JS it opens the preferences dialog. %>
+        <li><a href="/cookies#manage" data-open-cookie-settings>Cookie Settings</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; <%= year %> <%= siteName %>. All rights reserved. Demo application - no real data.</p>
+    </div>
+  </div>
+</footer>

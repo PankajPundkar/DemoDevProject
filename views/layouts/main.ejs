@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title ? title + ' · ' + siteName : siteName %></title>
+  <meta name="description" content="<%= siteName %> - a demo website showing secure authentication and GDPR-aware cookie consent.">
+  <% if (locals.csrfToken) { %><meta name="csrf-token" content="<%= csrfToken %>"><% } %>
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/cookie-consent.css">
+  <%# nav.js intentionally not deferred: it adds the `js` class before first paint. %>
+  <script src="/js/nav.js"></script>
+  <script src="/js/form-validation.js" defer></script>
+  <script src="/js/cookie-consent.js" defer></script>
+</head>
+<body
+  data-cookie-policy-version="<%= cookiePolicyVersion %>"
+  data-cookie-secure="<%= cookieSecure ? 'true' : 'false' %>"
+  data-consent-cookie="<%= consentCookieName %>"
+  data-consent-max-age-days="<%= consentMaxAgeDays %>">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <%- include('../partials/header') %>
+
+  <main id="main" class="site-main" tabindex="-1">
+    <div class="container">
+      <%- include('../partials/flash') %>
+      <%- body %>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+  <%- include('../partials/cookie-consent') %>
+</body>
+</html>

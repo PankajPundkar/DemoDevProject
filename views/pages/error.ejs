@@ -1,0 +1,11 @@
+<section class="error-page">
+  <p class="error-page__code"><%= status %></p>
+  <h1><%= title %></h1>
+  <p class="error-page__message"><%= message %></p>
+  <div class="error-page__actions">
+    <a class="btn btn-primary" href="/">Back to home</a>
+    <% if (status === 403) { %>
+      <button type="button" class="btn btn-outline" data-history-back>Go back and retry</button>
+    <% } %>
+  </div>
+</section>

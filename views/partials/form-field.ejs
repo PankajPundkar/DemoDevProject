@@ -1,0 +1,48 @@
+<%#
+  Reusable accessible form field. Read all params via `locals` so omitted ones are just undefined.
+  Params: name, label, type, value, error, autocomplete, hint, required (default true), minlength, maxlength
+%>
+<%
+  const f = {
+    name: locals.name,
+    label: locals.label,
+    type: locals.type || 'text',
+    value: locals.value || '',
+    error: locals.error || '',
+    autocomplete: locals.autocomplete,
+    hint: locals.hint,
+    required: locals.required !== false,
+    minlength: locals.minlength,
+    maxlength: locals.maxlength,
+  };
+  const id = 'field-' + f.name;
+  const errorId = id + '-error';
+  const hintId = f.hint ? id + '-hint' : null;
+  const describedBy = [hintId, errorId].filter(Boolean).join(' ');
+  const isPassword = f.type === 'password';
+%>
+<div class="form-field<%= f.error ? ' has-error' : '' %>">
+  <label class="form-label" for="<%= id %>">
+    <%= f.label %><% if (f.required) { %> <span class="required" aria-hidden="true">*</span><span class="visually-hidden">(required)</span><% } %>
+  </label>
+  <% if (f.hint) { %><p class="form-hint" id="<%= hintId %>"><%= f.hint %></p><% } %>
+  <div class="input-wrap<%= isPassword ? ' input-wrap--password' : '' %>">
+    <input
+      class="form-input"
+      id="<%= id %>"
+      name="<%= f.name %>"
+      type="<%= f.type %>"
+      <% if (!isPassword && f.value) { %>value="<%= f.value %>"<% } %>
+      <% if (f.autocomplete) { %>autocomplete="<%= f.autocomplete %>"<% } %>
+      <% if (f.minlength) { %>minlength="<%= f.minlength %>"<% } %>
+      <% if (f.maxlength) { %>maxlength="<%= f.maxlength %>"<% } %>
+      <% if (f.required) { %>required aria-required="true"<% } %>
+      aria-describedby="<%= describedBy %>"
+      <% if (f.error) { %>aria-invalid="true"<% } %>
+    >
+    <% if (isPassword) { %>
+      <button type="button" class="password-toggle" data-toggle-password="<%= id %>" aria-controls="<%= id %>" aria-pressed="false">Show</button>
+    <% } %>
+  </div>
+  <p class="field-error" id="<%= errorId %>"><%= f.error %></p>
+</div>

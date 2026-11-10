@@ -1,0 +1,74 @@
+<article class="prose">
+  <h1>Privacy Policy</h1>
+  <p class="text-muted">
+    This is a template privacy policy for a <strong>demo application</strong>. It is not legal advice;
+    have a real policy reviewed before going live.
+  </p>
+
+  <h2>1. Who we are</h2>
+  <p>
+    <%= siteName %> ("we", "us") is the controller of the personal data processed through this website.
+    You can contact us about privacy at <a href="mailto:<%= contactEmail %>"><%= contactEmail %></a>.
+  </p>
+
+  <h2>2. What personal data we collect</h2>
+  <ul>
+    <li><strong>Account data</strong> - your full name, email address and a one-way hash of your password (we never store your password itself).</li>
+    <li><strong>Session data</strong> - a random session identifier stored in a cookie while you are logged in, plus a security token that protects forms.</li>
+    <li><strong>Cookie consent record</strong> - a random identifier, your cookie choices, the policy version and the time of your decision. No IP address.</li>
+    <li><strong>Optional analytics/marketing data</strong> - only if you consent to those cookie categories.</li>
+  </ul>
+  <p>We do not send emails, sell your data or use it for automated decision-making.</p>
+
+  <h2>3. Why we process it and our legal basis</h2>
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr><th scope="col">Purpose</th><th scope="col">Data</th><th scope="col">Legal basis (GDPR Art. 6)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td data-label="Purpose">Creating and running your account, letting you log in</td><td data-label="Data">Account data, session data</td><td data-label="Legal basis">Performance of a contract - Art. 6(1)(b)</td></tr>
+        <tr><td data-label="Purpose">Keeping the site secure (CSRF protection, login throttling)</td><td data-label="Data">Session data, temporary IP-based counters held in memory</td><td data-label="Legal basis">Legitimate interests - Art. 6(1)(f)</td></tr>
+        <tr><td data-label="Purpose">Proving your cookie choices</td><td data-label="Data">Consent record</td><td data-label="Legal basis">Legal obligation - Art. 6(1)(c) with Art. 7(1)</td></tr>
+        <tr><td data-label="Purpose">Analytics and marketing cookies</td><td data-label="Data">Optional cookie identifiers</td><td data-label="Legal basis">Consent - Art. 6(1)(a)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>4. How long we keep it</h2>
+  <ul>
+    <li>Account data: until you ask us to delete your account.</li>
+    <li>Session data: until you log out or the session expires.</li>
+    <li>Login-throttling counters: in memory for up to the throttling window, then discarded.</li>
+    <li>Consent records: for as long as needed to demonstrate consent, and capped in size.</li>
+    <li>Optional cookies: see the durations in the <a href="/cookies">Cookie Policy</a>.</li>
+  </ul>
+
+  <h2>5. Who we share it with</h2>
+  <p>
+    Nobody. In this demo all data stays on the server running the application. If real analytics or
+    advertising providers were added, they would be listed here and in the Cookie Policy.
+  </p>
+
+  <h2>6. Your rights</h2>
+  <p>Under the GDPR you have the right to:</p>
+  <ul>
+    <li><strong>Access</strong> the personal data we hold about you;</li>
+    <li><strong>Rectify</strong> inaccurate data;</li>
+    <li><strong>Erase</strong> your data ("right to be forgotten");</li>
+    <li><strong>Restrict</strong> or <strong>object to</strong> processing;</li>
+    <li><strong>Data portability</strong> - receive your data in a machine-readable format;</li>
+    <li><strong>Withdraw consent</strong> at any time, without affecting earlier processing - use "Cookie Settings" in the footer;</li>
+    <li><strong>Complain</strong> to your local data protection supervisory authority.</li>
+  </ul>
+  <p>To exercise any right, email <a href="mailto:<%= contactEmail %>"><%= contactEmail %></a>. We reply within one month.</p>
+
+  <h2>7. Security</h2>
+  <p>
+    Passwords are hashed with bcrypt. Sessions are kept server-side and identified by an HttpOnly
+    cookie. Forms are protected against cross-site request forgery and login attempts are rate-limited.
+  </p>
+
+  <h2>8. Changes</h2>
+  <p>We will update this page if our data practices change.</p>
+</article>
