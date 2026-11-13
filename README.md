@@ -139,6 +139,34 @@ The `qa/` folder holds the output of the mcp-qa-lab agent pipeline for this app:
 
 Each Playwright test is named and tagged with its scenario ID, so `TS-013` in the test design is `TS-013` in the report. Once the scenarios exist in Xray, map them in `e2e/xray-test-keys.json` (`{ "TS-013": "AQA-123" }`). The JUnit report then carries a `test_key` for each test, ready for import into Xray.
 
+### AI agents and MCP servers
+
+This repo includes the same QA agents and MCP servers as [mcp-qa-lab](https://github.com/PankajPundkar/mcp-qa-lab), adapted to this project's folders:
+
+- **`.github/agents/`**: 8 Copilot agents: Story Review → Requirements → Test Design → Xray Test Creation → Playwright Coding → Execution & Repair → GitHub PR Review → GitHub. They share the rules in `.github/copilot-instructions.md`, and every agent that changes something asks for approval first.
+- **`.mcp.json`**: MCP servers for Claude Code and other MCP clients. For VS Code, add the same entries to `.vscode/mcp.json`, which is git-ignored.
+
+| MCP server | What it gives the agents |
+|---|---|
+| `atlassian` | Jira, used to read and create stories (Atlassian's hosted server, sign in on first use) |
+| `playwright` | A browser the agent can drive (`@playwright/mcp`) |
+| `xray` | Search, read and create Xray tests. The code is in `tools/xray-mcp/server.ts`; credentials come from `.env` |
+
+The Xray server's tools: `get_xray_auth_status`, `search_xray_tests`, `get_xray_test`, `get_xray_test_details`, `get_expanded_test`, `get_xray_test_plan_tests`, `resolve_xray_test_keys` (all read-only) and `create_xray_manual_test` (write). Fill in the `XRAY_*` values in `.env` first, then check them with `npm run xray:verify-auth`.
+
+| Command | What it does |
+|---|---|
+| `npm run test:xray` | Tests for the Xray client and MCP server (stubbed, no network) |
+| `npm run typecheck:tools` | Type-checks `tools/` |
+| `npm run xray:mcp` | Starts the Xray MCP server on stdio (normally your MCP client does this) |
+| `npm run xray:verify-auth` | Checks the Xray credentials |
+| `npm run xray:verify-test -- <issueId>` / `xray:verify-parser -- <issueId>` | Prints or parses one Xray test |
+| `npm run xray:import-results -- [junit.xml]` | Publishes `test-results/junit-results.xml` to Xray as a Test Execution |
+
+`tools/` is a copy of mcp-qa-lab's `src/integrations/` and `tests/xray/`. If you change it in one repo, copy the change to the other.
+
+**Publishing E2E results to Xray:** add each scenario's Xray key to `e2e/xray-test-keys.json`, then run `npm run test:e2e && npm run xray:import-results`. The import refuses a report in which any test has no key, so Xray never creates stray tests. In CI the **Import results into Xray** step does this on every push once you add the `XRAY_CLIENT_ID` / `XRAY_CLIENT_SECRET` secrets and the `JIRA_PROJECT_KEY` / `XRAY_TEST_PLAN_KEY` variables. Until then it is skipped.
+
 ### Manual test checklist
 
 1. Open http://localhost:3000. The cookie banner appears. Click **Reject non-essential**. In DevTools → Application → Cookies, only `cookie_consent` (and `sid`) exist.
@@ -202,6 +230,9 @@ Each Playwright test is named and tagged with its scenario ID, so `TS-013` in th
 ├── tests/                      # node:test + supertest
 ├── e2e/                        # Playwright browser tests (pages/, specs/, fixtures)
 ├── qa/                         # Stories, requirements, test design, Xray preview
+├── tools/                      # Xray client, Xray MCP server and their tests
+├── .github/                    # Copilot agents, instructions, CI workflow
+├── .mcp.json                   # MCP servers: atlassian, playwright, xray
 ├── playwright.config.ts
 ├── .env.example
 ├── package.json
