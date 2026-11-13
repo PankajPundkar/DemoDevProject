@@ -16,10 +16,19 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --import tsx --test tests/*.test.ts",
     "typecheck:e2e": "tsc -p e2e/tsconfig.json",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --project=chromium",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:ui": "playwright test --ui",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "test:xray": "playwright test --project=xray-tools",
+    "typecheck:tools": "tsc -p tools/tsconfig.json",
+    "xray:mcp": "tsx tools/xray-mcp/server.ts",
+    "xray:import-results": "tsx tools/xray/import-junit-results.ts",
+    "xray:verify-auth": "tsx tools/xray/verify-auth.ts",
+    "xray:verify-test": "tsx tools/xray/verify-test.ts",
+    "xray:verify-parser": "tsx tools/xray/verify-parser.ts",
+    "xray:inspect-test-schema": "tsx tools/xray/inspect-expanded-test-schema.ts",
+    "xray:inspect-mutation-schema": "tsx tools/xray/inspect-mutation-schema.ts"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
@@ -31,13 +40,16 @@
     "helmet": "^8.3.0"
   },
   "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
     "@playwright/test": "^1.64.1",
     "@types/express": "^5.0.6",
     "@types/express-session": "^1.19.0",
     "@types/node": "^26.6.6",
     "@types/supertest": "^7.2.1",
+    "fast-xml-parser": "^5.11.2",
     "supertest": "^7.3.2",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2"
+    "typescript": "^7.0.2",
+    "zod": "^4.6.7"
   }
 }

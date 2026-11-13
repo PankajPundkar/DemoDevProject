@@ -13,7 +13,6 @@ const externalBaseURL = process.env.E2E_BASE_URL;
 const baseURL = externalBaseURL ?? `http://localhost:${PORT}`;
 
 export default defineConfig({
-  testDir: './e2e/specs',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
@@ -29,7 +28,12 @@ export default defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [
+    // Browser tests for DemoSite (npm run test:e2e).
+    { name: 'chromium', testDir: './e2e/specs', use: { ...devices['Desktop Chrome'] } },
+    // Unit tests for the Xray client and MCP server in tools/ (npm run test:xray). No browser, no network.
+    { name: 'xray-tools', testDir: './tools/tests' },
+  ],
   webServer: externalBaseURL
     ? undefined
     : {

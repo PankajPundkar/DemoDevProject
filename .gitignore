@@ -21,6 +21,9 @@ playwright-report/
 test-results/
 blob-report/
 
+# MCP: local client config and Playwright MCP output
+.playwright-mcp/
+
 # OS / editor
 .DS_Store
 Thumbs.db

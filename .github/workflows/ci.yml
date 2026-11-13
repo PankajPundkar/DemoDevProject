@@ -35,8 +35,14 @@ jobs:
       - name: Type-check E2E tests
         run: npm run typecheck:e2e
 
+      - name: Type-check Xray tools
+        run: npm run typecheck:tools
+
       - name: Unit and integration tests
         run: npm test
+
+      - name: Xray tools tests (client and MCP server, no network)
+        run: npm run test:xray
 
       - name: Build
         run: npm run build
@@ -45,6 +51,9 @@ jobs:
     name: Playwright E2E tests
     runs-on: ubuntu-24.04
     needs: build-and-test
+    env:
+      # Secrets can't be used in step conditions directly, so expose only whether one is set.
+      HAS_XRAY_CREDENTIALS: ${{ secrets.XRAY_CLIENT_ID != '' }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -79,3 +88,20 @@ jobs:
           name: playwright-junit-report
           path: test-results/junit-results.xml
           retention-days: 14
+
+      # Publishes the E2E results to Xray as a Test Execution. Runs only on pushes (never for
+      # pull requests) and only once configured in Settings > Secrets and variables > Actions:
+      #   secrets: XRAY_CLIENT_ID, XRAY_CLIENT_SECRET
+      #   variables: JIRA_PROJECT_KEY, XRAY_TEST_PLAN_KEY (optional: XRAY_BASE_URL)
+      # Every test needs an Xray key in e2e/xray-test-keys.json, or the import is refused.
+      - name: Import results into Xray
+        if: >-
+          always() && !cancelled() && github.event_name == 'push'
+          && env.HAS_XRAY_CREDENTIALS == 'true' && vars.XRAY_TEST_PLAN_KEY != ''
+        env:
+          XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
+          XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+          XRAY_BASE_URL: ${{ vars.XRAY_BASE_URL || 'https://xray.cloud.getxray.app/api/v2' }}
+          JIRA_PROJECT_KEY: ${{ vars.JIRA_PROJECT_KEY }}
+          XRAY_TEST_PLAN_KEY: ${{ vars.XRAY_TEST_PLAN_KEY }}
+        run: npm run xray:import-results -- test-results/junit-results.xml
