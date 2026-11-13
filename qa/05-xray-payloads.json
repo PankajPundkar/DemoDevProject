@@ -1,14 +1,14 @@
 [
   {
     "scenarioId": "TS-001",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-01",
       "REQ-08"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Register with valid details",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Register with valid details",
       "steps": [
         {
           "action": "Open /register",
@@ -36,13 +36,13 @@
   },
   {
     "scenarioId": "TS-002",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-01"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Submit an empty registration form",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Submit an empty registration form",
       "steps": [
         {
           "action": "Open /register and click Create account without filling anything",
@@ -60,13 +60,13 @@
   },
   {
     "scenarioId": "TS-003",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-03"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Reject an invalid email format",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Reject an invalid email format",
       "steps": [
         {
           "action": "Open /register and enter an invalid email, then leave the field",
@@ -79,13 +79,13 @@
   },
   {
     "scenarioId": "TS-004",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-04"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Reject a 7-character password",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Reject a 7-character password",
       "steps": [
         {
           "action": "Open /register and enter a 7-character password, then leave the field",
@@ -98,13 +98,13 @@
   },
   {
     "scenarioId": "TS-005",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-04"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Accept an 8-character password",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Accept an 8-character password",
       "steps": [
         {
           "action": "Register with an 8-character password containing a letter and a number",
@@ -117,13 +117,13 @@
   },
   {
     "scenarioId": "TS-006",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-04"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Reject a password without a number",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Reject a password without a number",
       "steps": [
         {
           "action": "Open /register and enter a letters-only password, then leave the field",
@@ -136,13 +136,13 @@
   },
   {
     "scenarioId": "TS-007",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-05"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Reject a confirm password that does not match",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Reject a confirm password that does not match",
       "steps": [
         {
           "action": "Enter a valid password and a different confirmation, then leave the field",
@@ -155,13 +155,13 @@
   },
   {
     "scenarioId": "TS-008",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-02"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Reject a full name containing < or >",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Reject a full name containing < or >",
       "steps": [
         {
           "action": "Enter a full name containing angle brackets, then leave the field",
@@ -174,13 +174,13 @@
   },
   {
     "scenarioId": "TS-009",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-02"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Reject a 1-character full name",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Reject a 1-character full name",
       "steps": [
         {
           "action": "Enter a 1-character full name, then leave the field",
@@ -193,13 +193,13 @@
   },
   {
     "scenarioId": "TS-010",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-07"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Reject an already-registered email in different letter case",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Reject an already-registered email in different letter case",
       "steps": [
         {
           "action": "Register again with the same email in upper case",
@@ -217,13 +217,13 @@
   },
   {
     "scenarioId": "TS-011",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-06"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Server rejects invalid input when browser validation is off",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Server rejects invalid input when browser validation is off",
       "steps": [
         {
           "action": "Open /register and submit invalid data",
@@ -241,13 +241,13 @@
   },
   {
     "scenarioId": "TS-012",
-    "storyKey": "DRAFT-1",
+    "storyKey": "AQA-58",
     "requirementIds": [
       "REQ-09"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-1] Show and hide the password",
+      "projectKey": "AQA",
+      "summary": "[AQA-58] Show and hide the password",
       "steps": [
         {
           "action": "Type a password and click Show",
@@ -265,14 +265,14 @@
   },
   {
     "scenarioId": "TS-013",
-    "storyKey": "DRAFT-2",
+    "storyKey": "AQA-59",
     "requirementIds": [
       "REQ-12",
       "REQ-18"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-2] Log in with valid credentials",
+      "projectKey": "AQA",
+      "summary": "[AQA-59] Log in with valid credentials",
       "steps": [
         {
           "action": "Open /login and enter valid credentials, click Log in",
@@ -290,13 +290,13 @@
   },
   {
     "scenarioId": "TS-014",
-    "storyKey": "DRAFT-2",
+    "storyKey": "AQA-59",
     "requirementIds": [
       "REQ-13"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-2] Log in with the email in different letter case",
+      "projectKey": "AQA",
+      "summary": "[AQA-59] Log in with the email in different letter case",
       "steps": [
         {
           "action": "Log in with the email in upper case",
@@ -309,13 +309,13 @@
   },
   {
     "scenarioId": "TS-015",
-    "storyKey": "DRAFT-2",
+    "storyKey": "AQA-59",
     "requirementIds": [
       "REQ-14"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-2] Wrong password shows a generic error",
+      "projectKey": "AQA",
+      "summary": "[AQA-59] Wrong password shows a generic error",
       "steps": [
         {
           "action": "Log in with a wrong password",
@@ -328,13 +328,13 @@
   },
   {
     "scenarioId": "TS-016",
-    "storyKey": "DRAFT-2",
+    "storyKey": "AQA-59",
     "requirementIds": [
       "REQ-14"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-2] Unknown email shows the same generic error",
+      "projectKey": "AQA",
+      "summary": "[AQA-59] Unknown email shows the same generic error",
       "steps": [
         {
           "action": "Log in with an email that is not registered",
@@ -347,13 +347,13 @@
   },
   {
     "scenarioId": "TS-017",
-    "storyKey": "DRAFT-2",
+    "storyKey": "AQA-59",
     "requirementIds": [
       "REQ-11"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-2] Submit an empty login form",
+      "projectKey": "AQA",
+      "summary": "[AQA-59] Submit an empty login form",
       "steps": [
         {
           "action": "Open /login and click Log in without filling anything",
@@ -366,13 +366,13 @@
   },
   {
     "scenarioId": "TS-018",
-    "storyKey": "DRAFT-2",
+    "storyKey": "AQA-59",
     "requirementIds": [
       "REQ-16"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-2] Log out",
+      "projectKey": "AQA",
+      "summary": "[AQA-59] Log out",
       "steps": [
         {
           "action": "Click Log out in the header",
@@ -395,13 +395,13 @@
   },
   {
     "scenarioId": "TS-019",
-    "storyKey": "DRAFT-2",
+    "storyKey": "AQA-59",
     "requirementIds": [
       "REQ-17"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-2] Logged-in user cannot open Login or Register",
+      "projectKey": "AQA",
+      "summary": "[AQA-59] Logged-in user cannot open Login or Register",
       "steps": [
         {
           "action": "Open /login",
@@ -419,14 +419,14 @@
   },
   {
     "scenarioId": "TS-020",
-    "storyKey": "DRAFT-3",
+    "storyKey": "AQA-60",
     "requirementIds": [
       "REQ-19",
       "REQ-20"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-3] Anonymous dashboard access redirects to Login and back",
+      "projectKey": "AQA",
+      "summary": "[AQA-60] Anonymous dashboard access redirects to Login and back",
       "steps": [
         {
           "action": "Open /dashboard",
@@ -444,13 +444,13 @@
   },
   {
     "scenarioId": "TS-021",
-    "storyKey": "DRAFT-3",
+    "storyKey": "AQA-60",
     "requirementIds": [
       "REQ-21"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-3] Dashboard shows the profile without sensitive data",
+      "projectKey": "AQA",
+      "summary": "[AQA-60] Dashboard shows the profile without sensitive data",
       "steps": [
         {
           "action": "Open /dashboard",
@@ -468,13 +468,13 @@
   },
   {
     "scenarioId": "TS-022",
-    "storyKey": "DRAFT-3",
+    "storyKey": "AQA-60",
     "requirementIds": [
       "REQ-22"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-3] Session cookie is HttpOnly and SameSite=Lax",
+      "projectKey": "AQA",
+      "summary": "[AQA-60] Session cookie is HttpOnly and SameSite=Lax",
       "steps": [
         {
           "action": "Inspect the \"sid\" cookie",
@@ -492,13 +492,13 @@
   },
   {
     "scenarioId": "TS-023",
-    "storyKey": "DRAFT-3",
+    "storyKey": "AQA-60",
     "requirementIds": [
       "REQ-23"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-3] Session ID changes on login",
+      "projectKey": "AQA",
+      "summary": "[AQA-60] Session ID changes on login",
       "steps": [
         {
           "action": "Open /login and note the \"sid\" cookie value",
@@ -516,18 +516,18 @@
   },
   {
     "scenarioId": "TS-024",
-    "storyKey": "DRAFT-3",
+    "storyKey": "AQA-60",
     "requirementIds": [
       "REQ-24"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-3] Login with a tampered CSRF token is blocked",
+      "projectKey": "AQA",
+      "summary": "[AQA-60] Login with a tampered CSRF token is blocked",
       "steps": [
         {
           "action": "Open /login and change the hidden _csrf value",
           "data": "tampered-token",
-          "result": "None"
+          "result": "The hidden _csrf field holds the tampered value"
         },
         {
           "action": "Submit valid credentials",
@@ -540,14 +540,14 @@
   },
   {
     "scenarioId": "TS-025",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-25",
       "REQ-26"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] First visit shows the banner and sets no optional cookies",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] First visit shows the banner and sets no optional cookies",
       "steps": [
         {
           "action": "Open the Home page",
@@ -565,15 +565,15 @@
   },
   {
     "scenarioId": "TS-026",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-27",
       "REQ-31",
       "REQ-33"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] Accept all cookies",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] Accept all cookies",
       "steps": [
         {
           "action": "Click Accept all",
@@ -596,13 +596,13 @@
   },
   {
     "scenarioId": "TS-027",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-28"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] Reject non-essential cookies",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] Reject non-essential cookies",
       "steps": [
         {
           "action": "Click Reject non-essential",
@@ -620,13 +620,13 @@
   },
   {
     "scenarioId": "TS-028",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-29"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] Customize: allow analytics only",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] Customize: allow analytics only",
       "steps": [
         {
           "action": "Click Customize",
@@ -649,13 +649,13 @@
   },
   {
     "scenarioId": "TS-029",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-30"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] Closing the dialog is not consent",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] Closing the dialog is not consent",
       "steps": [
         {
           "action": "Click Customize, then close the dialog with ×",
@@ -673,13 +673,13 @@
   },
   {
     "scenarioId": "TS-030",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-32"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] Withdraw consent via Cookie Settings",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] Withdraw consent via Cookie Settings",
       "steps": [
         {
           "action": "Click Cookie Settings in the footer",
@@ -702,13 +702,13 @@
   },
   {
     "scenarioId": "TS-031",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-34"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] Outdated policy version shows the banner again",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] Outdated policy version shows the banner again",
       "steps": [
         {
           "action": "Open the Home page",
@@ -721,13 +721,13 @@
   },
   {
     "scenarioId": "TS-032",
-    "storyKey": "DRAFT-4",
+    "storyKey": "AQA-61",
     "requirementIds": [
       "REQ-35"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-4] Dashboard shows the current consent choice",
+      "projectKey": "AQA",
+      "summary": "[AQA-61] Dashboard shows the current consent choice",
       "steps": [
         {
           "action": "Open /dashboard",
@@ -740,13 +740,13 @@
   },
   {
     "scenarioId": "TS-033",
-    "storyKey": "DRAFT-5",
+    "storyKey": "AQA-62",
     "requirementIds": [
       "REQ-36"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-5] Guest header navigation",
+      "projectKey": "AQA",
+      "summary": "[AQA-62] Guest header navigation",
       "steps": [
         {
           "action": "Open Home",
@@ -764,13 +764,13 @@
   },
   {
     "scenarioId": "TS-034",
-    "storyKey": "DRAFT-5",
+    "storyKey": "AQA-62",
     "requirementIds": [
       "REQ-38"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-5] Footer legal links open the legal pages",
+      "projectKey": "AQA",
+      "summary": "[AQA-62] Footer legal links open the legal pages",
       "steps": [
         {
           "action": "Click Privacy Policy, Cookie Policy and Terms of Use in the footer in turn",
@@ -783,13 +783,13 @@
   },
   {
     "scenarioId": "TS-035",
-    "storyKey": "DRAFT-5",
+    "storyKey": "AQA-62",
     "requirementIds": [
       "REQ-39"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-5] Unknown URL shows the 404 page",
+      "projectKey": "AQA",
+      "summary": "[AQA-62] Unknown URL shows the 404 page",
       "steps": [
         {
           "action": "Open a URL that does not exist",
@@ -807,13 +807,13 @@
   },
   {
     "scenarioId": "TS-036",
-    "storyKey": "DRAFT-5",
+    "storyKey": "AQA-62",
     "requirementIds": [
       "REQ-37"
     ],
     "payload": {
-      "projectKey": "<JIRA_PROJECT_KEY>",
-      "summary": "[DRAFT-5] Mobile menu opens and closes",
+      "projectKey": "AQA",
+      "summary": "[AQA-62] Mobile menu opens and closes",
       "steps": [
         {
           "action": "Click the menu button",

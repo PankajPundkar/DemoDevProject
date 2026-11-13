@@ -131,7 +131,7 @@ The `qa/` folder holds the output of the mcp-qa-lab agent pipeline for this app:
 
 | File | Agent | Content |
 |---|---|---|
-| `01-user-stories.md` | (input) | Draft user stories DRAFT-1 to DRAFT-5 with acceptance criteria |
+| `01-user-stories.md` | (input) | User stories AQA-58 to AQA-62 with acceptance criteria |
 | `02-story-review.md` | Story Review Agent | Clarity, testability and open questions per story |
 | `03-requirements.md` / `.json` | Requirements Agent | 40 traceable requirements (REQ-01 to REQ-40) |
 | `04-test-design.md` | Test Design Agent | 36 scenarios (TS-001 to TS-036) with steps and expected results |

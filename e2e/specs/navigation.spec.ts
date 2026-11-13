@@ -2,9 +2,9 @@ import { expect, test } from '../fixtures';
 import { LegalPage } from '../pages/SimplePages';
 import { scenario } from '../support/scenarios';
 
-/** DRAFT-5 – Site navigation, legal pages and error pages. Scenarios: TS-033 … TS-036. */
-test.describe('DRAFT-5 Site navigation, legal pages and error pages', () => {
-  test('TS-033 guest header navigation', scenario('TS-033', 'DRAFT-5', 'REQ-36'), async ({ page, homePage }) => {
+/** AQA-62 – Site navigation, legal pages and error pages. Scenarios: TS-033 … TS-036. */
+test.describe('AQA-62 Site navigation, legal pages and error pages', () => {
+  test('TS-033 guest header navigation', scenario('TS-033', 'AQA-62', 'REQ-36'), async ({ page, homePage }) => {
     await homePage.goto();
     const { header } = homePage;
 
@@ -23,7 +23,7 @@ test.describe('DRAFT-5 Site navigation, legal pages and error pages', () => {
     await expect(header.currentLink).toHaveText('Register');
   });
 
-  test('TS-034 footer legal links open the legal pages', scenario('TS-034', 'DRAFT-5', 'REQ-38'), async ({ page, homePage }) => {
+  test('TS-034 footer legal links open the legal pages', scenario('TS-034', 'AQA-62', 'REQ-38'), async ({ page, homePage }) => {
     const pages = [
       { link: 'Privacy Policy', path: '/privacy', heading: 'Privacy Policy' },
       { link: 'Cookie Policy', path: '/cookies', heading: 'Cookie Policy' },
@@ -42,7 +42,7 @@ test.describe('DRAFT-5 Site navigation, legal pages and error pages', () => {
     }
   });
 
-  test('TS-035 unknown URL shows the 404 page', scenario('TS-035', 'DRAFT-5', 'REQ-39'), async ({ page, errorPage }) => {
+  test('TS-035 unknown URL shows the 404 page', scenario('TS-035', 'AQA-62', 'REQ-39'), async ({ page, errorPage }) => {
     const response = await page.goto('/this-page-does-not-exist');
 
     expect(response?.status()).toBe(404);
@@ -56,7 +56,7 @@ test.describe('DRAFT-5 Site navigation, legal pages and error pages', () => {
   test.describe('on a small screen', () => {
     test.use({ viewport: { width: 375, height: 812 } });
 
-    test('TS-036 mobile menu opens and closes', scenario('TS-036', 'DRAFT-5', 'REQ-37'), async ({ page, homePage }) => {
+    test('TS-036 mobile menu opens and closes', scenario('TS-036', 'AQA-62', 'REQ-37'), async ({ page, homePage }) => {
       await homePage.goto();
       const { header } = homePage;
 

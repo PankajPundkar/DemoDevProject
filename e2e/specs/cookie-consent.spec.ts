@@ -2,12 +2,12 @@ import { expect, test } from '../fixtures';
 import { ANALYTICS_COOKIE, CONSENT_COOKIE, CookieConsent, MARKETING_COOKIE } from '../pages/components';
 import { scenario } from '../support/scenarios';
 
-/** DRAFT-4 – GDPR cookie consent. Scenarios: qa/04-test-design.md (TS-025 … TS-032). */
-test.describe('DRAFT-4 GDPR cookie consent', () => {
+/** AQA-61 – GDPR cookie consent. Scenarios: qa/04-test-design.md (TS-025 … TS-032). */
+test.describe('AQA-61 GDPR cookie consent', () => {
   // Every test here starts as a first-time visitor with no consent cookie.
   test.use({ consent: 'none' });
 
-  test('TS-025 first visit shows the banner and sets no optional cookies', scenario('TS-025', 'DRAFT-4', 'REQ-25, REQ-26'), async ({ page, context, homePage }) => {
+  test('TS-025 first visit shows the banner and sets no optional cookies', scenario('TS-025', 'AQA-61', 'REQ-25, REQ-26'), async ({ page, context, homePage }) => {
     await homePage.goto();
     const { consent } = homePage;
 
@@ -25,7 +25,7 @@ test.describe('DRAFT-4 GDPR cookie consent', () => {
     await expect(page.locator('script[src^="/js/vendor/"]')).toHaveCount(0);
   });
 
-  test('TS-026 accept all cookies', scenario('TS-026', 'DRAFT-4', 'REQ-27, REQ-31, REQ-33'), async ({ page, context, homePage }) => {
+  test('TS-026 accept all cookies', scenario('TS-026', 'AQA-61', 'REQ-27, REQ-31, REQ-33'), async ({ page, context, homePage }) => {
     await homePage.goto();
     const status = await homePage.consent.choose(homePage.consent.acceptAll);
 
@@ -47,7 +47,7 @@ test.describe('DRAFT-4 GDPR cookie consent', () => {
     await expect(homePage.consent.banner).toBeHidden();
   });
 
-  test('TS-027 reject non-essential cookies', scenario('TS-027', 'DRAFT-4', 'REQ-28'), async ({ page, context, homePage }) => {
+  test('TS-027 reject non-essential cookies', scenario('TS-027', 'AQA-61', 'REQ-28'), async ({ page, context, homePage }) => {
     await homePage.goto();
     expect(await homePage.consent.choose(homePage.consent.rejectAll)).toBe(204);
 
@@ -60,7 +60,7 @@ test.describe('DRAFT-4 GDPR cookie consent', () => {
     await expect(page.locator('script[src^="/js/vendor/"]')).toHaveCount(0);
   });
 
-  test('TS-028 customize: allow analytics only', scenario('TS-028', 'DRAFT-4', 'REQ-29'), async ({ context, homePage }) => {
+  test('TS-028 customize: allow analytics only', scenario('TS-028', 'AQA-61', 'REQ-29'), async ({ context, homePage }) => {
     await homePage.goto();
     const { consent } = homePage;
     await consent.customize.click();
@@ -81,7 +81,7 @@ test.describe('DRAFT-4 GDPR cookie consent', () => {
     expect(await CookieConsent.cookieNames(context)).not.toContain(MARKETING_COOKIE);
   });
 
-  test('TS-029 closing the dialog is not consent', scenario('TS-029', 'DRAFT-4', 'REQ-30'), async ({ context, homePage }) => {
+  test('TS-029 closing the dialog is not consent', scenario('TS-029', 'AQA-61', 'REQ-30'), async ({ context, homePage }) => {
     await homePage.goto();
     const { consent } = homePage;
     await consent.customize.click();
@@ -94,7 +94,7 @@ test.describe('DRAFT-4 GDPR cookie consent', () => {
     expect(await CookieConsent.cookieNames(context)).not.toContain(CONSENT_COOKIE);
   });
 
-  test('TS-030 withdraw consent via Cookie Settings', scenario('TS-030', 'DRAFT-4', 'REQ-32'), async ({ context, homePage }) => {
+  test('TS-030 withdraw consent via Cookie Settings', scenario('TS-030', 'AQA-61', 'REQ-32'), async ({ context, homePage }) => {
     await homePage.goto();
     const { consent, footer } = homePage;
     await consent.choose(consent.acceptAll);
@@ -115,7 +115,7 @@ test.describe('DRAFT-4 GDPR cookie consent', () => {
     expect(await CookieConsent.read(context)).toMatchObject({ analytics: false, marketing: false });
   });
 
-  test('TS-031 outdated policy version shows the banner again', scenario('TS-031', 'DRAFT-4', 'REQ-34'), async ({ context, baseURL, homePage }) => {
+  test('TS-031 outdated policy version shows the banner again', scenario('TS-031', 'AQA-61', 'REQ-34'), async ({ context, baseURL, homePage }) => {
     await CookieConsent.plant(context, baseURL as string, { analytics: true, marketing: true, version: '0' });
 
     await homePage.goto();
@@ -126,7 +126,7 @@ test.describe('DRAFT-4 GDPR cookie consent', () => {
     expect(await CookieConsent.cookieNames(context)).not.toContain(ANALYTICS_COOKIE);
   });
 
-  test('TS-032 dashboard shows the current consent choice', scenario('TS-032', 'DRAFT-4', 'REQ-35'), async ({ page, homePage, loginPage, dashboardPage, registeredUser }) => {
+  test('TS-032 dashboard shows the current consent choice', scenario('TS-032', 'AQA-61', 'REQ-35'), async ({ page, homePage, loginPage, dashboardPage, registeredUser }) => {
     await homePage.goto();
     const { consent } = homePage;
     await consent.customize.click();

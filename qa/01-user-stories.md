@@ -1,22 +1,22 @@
-# DemoSite – Draft User Stories
+# DemoSite – User Stories
 
-> **Status: DRAFT – not yet in Jira.** These stories were written from the current
-> behaviour of the application (code, templates and README at commit `486bb82`) so
-> the mcp-qa-lab agent pipeline can run on DemoSite. Keys `DRAFT-1` … `DRAFT-5` are
-> placeholders. When the stories are created in Jira, replace each `DRAFT-n` key
-> everywhere in `qa/` with the real issue key (for example `AQA-31`).
+> **Status: in Jira.** These stories were written from the current behaviour of the
+> application (code, templates and README at commit `486bb82`) so the mcp-qa-lab agent
+> pipeline can run on DemoSite. They were created in Jira project AQA on 2026-11-13 as
+> AQA-58 … AQA-62 (draft keys DRAFT-1 … DRAFT-5; see `qa/02-story-review.md`).
+> Jira is the source of truth; this file is the text they were created from.
 
 | Key | Summary | Area |
 | --- | --- | --- |
-| DRAFT-1 | User registration | Authentication |
-| DRAFT-2 | User login and logout | Authentication |
-| DRAFT-3 | Protected dashboard and session security | Access control |
-| DRAFT-4 | GDPR cookie consent | Privacy |
-| DRAFT-5 | Site navigation, legal pages and error pages | Navigation |
+| AQA-58 | User registration | Authentication |
+| AQA-59 | User login and logout | Authentication |
+| AQA-60 | Protected dashboard and session security | Access control |
+| AQA-61 | GDPR cookie consent | Privacy |
+| AQA-62 | Site navigation, legal pages and error pages | Navigation |
 
 ---
 
-## DRAFT-1 – User registration
+## AQA-58 – User registration
 
 **Issue type:** Story · **Priority:** High
 
@@ -39,7 +39,7 @@
 
 ---
 
-## DRAFT-2 – User login and logout
+## AQA-59 – User login and logout
 
 **Issue type:** Story · **Priority:** High
 
@@ -60,7 +60,7 @@
 
 ---
 
-## DRAFT-3 – Protected dashboard and session security
+## AQA-60 – Protected dashboard and session security
 
 **Issue type:** Story · **Priority:** High
 
@@ -79,7 +79,7 @@
 
 ---
 
-## DRAFT-4 – GDPR cookie consent
+## AQA-61 – GDPR cookie consent
 
 **Issue type:** Story · **Priority:** High
 
@@ -103,7 +103,7 @@
 
 ---
 
-## DRAFT-5 – Site navigation, legal pages and error pages
+## AQA-62 – Site navigation, legal pages and error pages
 
 **Issue type:** Story · **Priority:** Medium
 

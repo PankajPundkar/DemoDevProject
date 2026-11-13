@@ -26,7 +26,7 @@ export function scenario(id: string, story: string, requirements: string): Scena
     annotation: [
       { type: 'scenario_id', description: id },
       { type: 'story', description: story },
-      { type: 'requirements', description: requirements },
+      { type: 'requirement_ids', description: requirements },
       ...(key ? [{ type: 'test_key', description: key }] : []),
     ],
   };
