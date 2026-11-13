@@ -7,7 +7,7 @@
 </div>
 
 <div class="card-grid card-grid--2">
-  <section class="card" aria-labelledby="profile-title">
+  <section class="card" aria-labelledby="profile-title" data-testid="profile-card">
     <h2 id="profile-title" class="card__title">Your profile</h2>
     <dl class="data-list">
       <div><dt>Full name</dt><dd><%= user.fullName %></dd></div>
@@ -17,7 +17,7 @@
     </dl>
   </section>
 
-  <section class="card" aria-labelledby="privacy-title">
+  <section class="card" aria-labelledby="privacy-title" data-testid="privacy-card">
     <h2 id="privacy-title" class="card__title">Your privacy</h2>
     <p>Current cookie preferences on this device:</p>
     <ul class="consent-summary" data-consent-summary>

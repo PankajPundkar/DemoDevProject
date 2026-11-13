@@ -71,6 +71,11 @@ export const config = {
     windowMs: int(process.env.LOGIN_RATE_LIMIT_WINDOW_MINUTES, 15, 1, 24 * 60) * 60 * 1000,
   },
 
+  // Registration attempts allowed per IP per hour. Raised for automated tests.
+  registerRateLimit: {
+    max: int(process.env.REGISTER_RATE_LIMIT_MAX, isTest ? 1000 : 20, 1, 10000),
+  },
+
   cookiePolicyVersion: process.env.COOKIE_POLICY_VERSION ?? '1',
 
   paths: {

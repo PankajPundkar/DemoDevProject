@@ -17,6 +17,9 @@ data/*.corrupt-*
 
 # Test artifacts
 tests/.tmp/
+playwright-report/
+test-results/
+blob-report/
 
 # OS / editor
 .DS_Store

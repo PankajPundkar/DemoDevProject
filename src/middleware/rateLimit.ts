@@ -29,7 +29,7 @@ export const loginLimiter = rateLimit({
 /** Light protection against automated mass sign-ups. */
 export const registerLimiter = rateLimit({
   windowMs: 60 * 60 * 1000,
-  limit: config.isTest ? 1000 : 20,
+  limit: config.registerRateLimit.max,
   standardHeaders: 'draft-8',
   legacyHeaders: false,
   handler: (_req: Request, res: Response) => {
