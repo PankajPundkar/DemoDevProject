@@ -1,29 +1,29 @@
 {
   "stories": [
     {
-      "key": "DRAFT-1",
+      "key": "AQA-58",
       "summary": "User registration",
-      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+      "source": "Jira (retrieved via Atlassian MCP, 2026-11-13)"
     },
     {
-      "key": "DRAFT-2",
+      "key": "AQA-59",
       "summary": "User login and logout",
-      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+      "source": "Jira (retrieved via Atlassian MCP, 2026-11-13)"
     },
     {
-      "key": "DRAFT-3",
+      "key": "AQA-60",
       "summary": "Protected dashboard and session security",
-      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+      "source": "Jira (retrieved via Atlassian MCP, 2026-11-13)"
     },
     {
-      "key": "DRAFT-4",
+      "key": "AQA-61",
       "summary": "GDPR cookie consent",
-      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+      "source": "Jira (retrieved via Atlassian MCP, 2026-11-13)"
     },
     {
-      "key": "DRAFT-5",
+      "key": "AQA-62",
       "summary": "Site navigation, legal pages and error pages",
-      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+      "source": "Jira (retrieved via Atlassian MCP, 2026-11-13)"
     }
   ],
   "requirements": [
@@ -37,7 +37,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -51,7 +51,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -65,7 +65,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -81,7 +81,7 @@
       ],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -95,7 +95,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -109,7 +109,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -121,13 +121,13 @@
       "priority": "High",
       "testability": "Needs clarification",
       "ambiguities": [
-        "Conflicts with enumeration protection in DRAFT-2 AC-4."
+        "Conflicts with enumeration protection in AQA-59 AC-4."
       ],
       "assumptions": [
         "Assumption (unconfirmed): the product owner accepts revealing that an email is registered, mitigated by rate limiting."
       ],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -141,7 +141,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -155,7 +155,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -167,13 +167,14 @@
       "priority": "Medium",
       "testability": "Needs clarification",
       "ambiguities": [
-        "Limit and window are not stated."
+        "Limit and window are not stated.",
+        "AC-10 says \"per network\" while AQA-59 AC-5 says \"per IP\"."
       ],
       "assumptions": [
         "Assumption (unconfirmed): 20 attempts per hour per IP, as currently coded."
       ],
       "traceability": {
-        "storyKey": "DRAFT-1",
+        "storyKey": "AQA-58",
         "storySummary": "User registration"
       }
     },
@@ -187,7 +188,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -198,10 +199,14 @@
       "requirementType": "Functional",
       "priority": "High",
       "testability": "Testable",
-      "ambiguities": [],
-      "assumptions": [],
+      "ambiguities": [
+        "AC-2 says login always opens the Dashboard; AQA-60 AC-2 returns the user to the originally requested page."
+      ],
+      "assumptions": [
+        "Assumption (unconfirmed): the Dashboard is the default destination only when no page was requested, as currently coded."
+      ],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -215,7 +220,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -229,7 +234,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -247,7 +252,7 @@
         "Assumption (unconfirmed): 10 failed attempts per 15 minutes, as currently coded."
       ],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -261,7 +266,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -275,7 +280,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -289,7 +294,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-2",
+        "storyKey": "AQA-59",
         "storySummary": "User login and logout"
       }
     },
@@ -303,7 +308,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-3",
+        "storyKey": "AQA-60",
         "storySummary": "Protected dashboard and session security"
       }
     },
@@ -317,7 +322,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-3",
+        "storyKey": "AQA-60",
         "storySummary": "Protected dashboard and session security"
       }
     },
@@ -331,7 +336,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-3",
+        "storyKey": "AQA-60",
         "storySummary": "Protected dashboard and session security"
       }
     },
@@ -345,7 +350,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-3",
+        "storyKey": "AQA-60",
         "storySummary": "Protected dashboard and session security"
       }
     },
@@ -359,7 +364,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-3",
+        "storyKey": "AQA-60",
         "storySummary": "Protected dashboard and session security"
       }
     },
@@ -373,7 +378,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-3",
+        "storyKey": "AQA-60",
         "storySummary": "Protected dashboard and session security"
       }
     },
@@ -389,7 +394,7 @@
       ],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -403,7 +408,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -417,7 +422,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -431,7 +436,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -445,7 +450,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -459,7 +464,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -473,7 +478,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -487,7 +492,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -501,7 +506,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -515,7 +520,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -529,7 +534,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-4",
+        "storyKey": "AQA-61",
         "storySummary": "GDPR cookie consent"
       }
     },
@@ -540,10 +545,12 @@
       "requirementType": "Functional",
       "priority": "Medium",
       "testability": "Testable",
-      "ambiguities": [],
+      "ambiguities": [
+        "\"Highlighted\" is not defined objectively (e.g. aria-current=\"page\")."
+      ],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-5",
+        "storyKey": "AQA-62",
         "storySummary": "Site navigation, legal pages and error pages"
       }
     },
@@ -561,7 +568,7 @@
         "Assumption (unconfirmed): below 768 px, as currently coded."
       ],
       "traceability": {
-        "storyKey": "DRAFT-5",
+        "storyKey": "AQA-62",
         "storySummary": "Site navigation, legal pages and error pages"
       }
     },
@@ -575,7 +582,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-5",
+        "storyKey": "AQA-62",
         "storySummary": "Site navigation, legal pages and error pages"
       }
     },
@@ -589,7 +596,7 @@
       "ambiguities": [],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-5",
+        "storyKey": "AQA-62",
         "storySummary": "Site navigation, legal pages and error pages"
       }
     },
@@ -605,7 +612,7 @@
       ],
       "assumptions": [],
       "traceability": {
-        "storyKey": "DRAFT-5",
+        "storyKey": "AQA-62",
         "storySummary": "Site navigation, legal pages and error pages"
       }
     }
@@ -615,49 +622,49 @@
       "requirementId": "REQ-07",
       "rule": "An already-registered email (any letter case) is rejected with \"An account with this email already exists. Try logging in instead.\"",
       "sourceAcceptanceCriterion": "AC-7",
-      "storyKey": "DRAFT-1",
+      "storyKey": "AQA-58",
       "priority": "High"
     },
     {
       "requirementId": "REQ-13",
       "rule": "Email matching at login ignores letter case.",
       "sourceAcceptanceCriterion": "AC-3",
-      "storyKey": "DRAFT-2",
+      "storyKey": "AQA-59",
       "priority": "Medium"
     },
     {
       "requirementId": "REQ-26",
       "rule": "No optional cookie or optional script before the visitor chooses.",
       "sourceAcceptanceCriterion": "AC-2",
-      "storyKey": "DRAFT-4",
+      "storyKey": "AQA-61",
       "priority": "High"
     },
     {
       "requirementId": "REQ-29",
       "rule": "The preferences dialog shows Strictly necessary always on and disabled, and optional categories unticked by default.",
       "sourceAcceptanceCriterion": "AC-5",
-      "storyKey": "DRAFT-4",
+      "storyKey": "AQA-61",
       "priority": "High"
     },
     {
       "requirementId": "REQ-30",
       "rule": "Closing the dialog without saving is not consent; the banner stays.",
       "sourceAcceptanceCriterion": "AC-6",
-      "storyKey": "DRAFT-4",
+      "storyKey": "AQA-61",
       "priority": "High"
     },
     {
       "requirementId": "REQ-33",
       "rule": "Each decision is recorded on the server anonymously.",
       "sourceAcceptanceCriterion": "AC-9",
-      "storyKey": "DRAFT-4",
+      "storyKey": "AQA-61",
       "priority": "Medium"
     },
     {
       "requirementId": "REQ-34",
       "rule": "A policy version change invalidates earlier consent and the banner reappears.",
       "sourceAcceptanceCriterion": "AC-10",
-      "storyKey": "DRAFT-4",
+      "storyKey": "AQA-61",
       "priority": "Medium"
     }
   ],
@@ -666,50 +673,57 @@
       "requirementId": "REQ-02",
       "rule": "Full name is 2–100 characters after trimming and contains no \"<\" or \">\".",
       "sourceAcceptanceCriterion": "AC-2",
-      "storyKey": "DRAFT-1",
+      "storyKey": "AQA-58",
       "priority": "High"
     },
     {
       "requirementId": "REQ-03",
       "rule": "Email address matches name@domain.tld, has no spaces and is at most 254 characters.",
       "sourceAcceptanceCriterion": "AC-3",
-      "storyKey": "DRAFT-1",
+      "storyKey": "AQA-58",
       "priority": "High"
     },
     {
       "requirementId": "REQ-04",
       "rule": "Password is at least 8 characters, at most 72 bytes, and has at least one letter and one number; the rule is shown as a hint.",
       "sourceAcceptanceCriterion": "AC-4",
-      "storyKey": "DRAFT-1",
+      "storyKey": "AQA-58",
       "priority": "High"
     },
     {
       "requirementId": "REQ-05",
       "rule": "Confirm password must equal Password.",
       "sourceAcceptanceCriterion": "AC-5",
-      "storyKey": "DRAFT-1",
+      "storyKey": "AQA-58",
       "priority": "High"
     }
   ],
   "ambiguities": [
     "REQ-04: 72 bytes vs 72 characters for non-ASCII passwords.",
-    "REQ-07: Conflicts with enumeration protection in DRAFT-2 AC-4.",
+    "REQ-07: Conflicts with enumeration protection in AQA-59 AC-4.",
     "REQ-10: Limit and window are not stated.",
+    "REQ-10: \"Per network\" (AQA-58 AC-10) vs \"per IP\" (AQA-59 AC-5).",
+    "REQ-12: Overlaps AQA-60 AC-2 (Dashboard vs originally requested page).",
     "REQ-15: Limit and window not stated.",
     "REQ-25: \"Equally prominent\" is subjective.",
+    "REQ-36: \"Highlighted\" is not defined objectively.",
     "REQ-37: Breakpoint not stated.",
     "REQ-40: \"Strict\" not defined."
   ],
   "assumptions": [
     "REQ-07: Assumption (unconfirmed): the product owner accepts revealing that an email is registered, mitigated by rate limiting.",
     "REQ-10: Assumption (unconfirmed): 20 attempts per hour per IP, as currently coded.",
+    "REQ-12: Assumption (unconfirmed): the Dashboard is the default destination only when no page was requested, as currently coded.",
     "REQ-15: Assumption (unconfirmed): 10 failed attempts per 15 minutes, as currently coded.",
     "REQ-37: Assumption (unconfirmed): below 768 px, as currently coded."
   ],
   "questions": [
-    "DRAFT-1: Is revealing that an email is already registered acceptable given DRAFT-2 enumeration protection?",
-    "DRAFT-1: What is the intended registration rate limit?",
-    "DRAFT-2: What are the intended login throttling numbers and the session timeout?",
-    "DRAFT-5: What is the mobile breakpoint and which CSP directives are required?"
+    "AQA-58: Is revealing that an email is already registered acceptable given AQA-59 enumeration protection?",
+    "AQA-58: What is the intended registration rate limit?",
+    "AQA-58/AQA-59: Should rate limits be stated \"per IP address\" in both stories?",
+    "AQA-59: What are the intended login throttling numbers and the session timeout?",
+    "AQA-59: Should AC-2 say the user goes to the originally requested page when there is one (AQA-60 AC-2)?",
+    "AQA-62: What is the mobile breakpoint and which CSP directives are required?",
+    "AQA-62: How should the current page be highlighted (e.g. aria-current=\"page\")?"
   ]
 }

@@ -1,7 +1,7 @@
 # Test Design – DemoSite
 
-> **Agent:** Test Design Agent (`mcp-qa-lab/.github/agents/test-design-agent.agent.md`) · **Workflow B** (requirements-based) · **Date:** 2026-11-13
-> **Input:** `qa/03-requirements.json`. REQ IDs are reused from the Requirements Agent.
+> **Agent:** Test Design Agent (`.github/agents/test-design-agent.agent.md`) · **Workflow B** (requirements-based) · **Date:** 2026-11-13
+> **Input:** `qa/03-requirements.json` (validated against Jira stories AQA-58 … AQA-62) and an Xray search of project AQA on 2026-11-13. REQ IDs are reused from the Requirements Agent.
 > **Status:** proposed for human review. Every scenario below is also automated in `e2e/specs/` and tagged with its scenario ID.
 
 ## 1. Requirement Analysis
@@ -51,7 +51,11 @@
 
 ## 2. Existing Test Coverage
 
-**Xray:** the Xray MCP server is not connected in this session, so existing Xray tests could **not** be searched. Run `search_xray_tests` before creating tests (see `qa/05-xray-creation-preview.md`).
+**Xray:** `search_xray_tests` on project AQA (2026-11-13) returned **1 test**. None of the 36 scenarios is already covered in Xray.
+
+| Xray Test ID | Test Name | Existing Coverage |
+| --- | --- | --- |
+| AQA-56 (Manual, 3 steps, no story links, not in Test Plan AQA-57) | TS-021 – Home page renders on desktop and mobile viewports | **Not a duplicate.** Related to TS-036 (mobile navigation, REQ-37) only by theme. It was written for a different app: step 3 expects Logout to go to the Login page, while AQA-59 AC-6 / REQ-16 says Logout returns to Home, and its viewport test data is still a placeholder ("pending PO – Q6"). **Naming clash:** its summary starts with "TS-021", which is a different scenario here (dashboard profile). Step 5 duplicate checks must match on the full title, not the TS prefix. |
 
 **Automated (repository):** the existing integration suite already covers:
 
@@ -71,48 +75,48 @@
 
 | Scenario ID | Story | Category | Scenario Title | Priority | Requirement Reference | Automated in |
 | --- | --- | --- | --- | --- | --- | --- |
-| TS-001 | DRAFT-1 | Positive | Register with valid details | High | REQ-01, REQ-08 | `e2e/specs/registration.spec.ts` |
-| TS-002 | DRAFT-1 | Negative | Submit an empty registration form | High | REQ-01 | `e2e/specs/registration.spec.ts` |
-| TS-003 | DRAFT-1 | Validation | Reject an invalid email format | Medium | REQ-03 | `e2e/specs/registration.spec.ts` |
-| TS-004 | DRAFT-1 | Boundary | Reject a 7-character password | High | REQ-04 | `e2e/specs/registration.spec.ts` |
-| TS-005 | DRAFT-1 | Boundary | Accept an 8-character password | High | REQ-04 | `e2e/specs/registration.spec.ts` |
-| TS-006 | DRAFT-1 | Validation | Reject a password without a number | Medium | REQ-04 | `e2e/specs/registration.spec.ts` |
-| TS-007 | DRAFT-1 | Validation | Reject a confirm password that does not match | High | REQ-05 | `e2e/specs/registration.spec.ts` |
-| TS-008 | DRAFT-1 | Security | Reject a full name containing &lt; or &gt; | Medium | REQ-02 | `e2e/specs/registration.spec.ts` |
-| TS-009 | DRAFT-1 | Boundary | Reject a 1-character full name | Medium | REQ-02 | `e2e/specs/registration.spec.ts` |
-| TS-010 | DRAFT-1 | Negative | Reject an already-registered email in different letter case | High | REQ-07 | `e2e/specs/registration.spec.ts` |
-| TS-011 | DRAFT-1 | Security | Server rejects invalid input when browser validation is off | High | REQ-06 | `e2e/specs/registration.spec.ts` |
-| TS-012 | DRAFT-1 | Positive | Show and hide the password | Low | REQ-09 | `e2e/specs/registration.spec.ts` |
-| TS-013 | DRAFT-2 | Positive | Log in with valid credentials | High | REQ-12, REQ-18 | `e2e/specs/login-logout.spec.ts` |
-| TS-014 | DRAFT-2 | Positive | Log in with the email in different letter case | Medium | REQ-13 | `e2e/specs/login-logout.spec.ts` |
-| TS-015 | DRAFT-2 | Negative | Wrong password shows a generic error | High | REQ-14 | `e2e/specs/login-logout.spec.ts` |
-| TS-016 | DRAFT-2 | Security | Unknown email shows the same generic error | High | REQ-14 | `e2e/specs/login-logout.spec.ts` |
-| TS-017 | DRAFT-2 | Negative | Submit an empty login form | Medium | REQ-11 | `e2e/specs/login-logout.spec.ts` |
-| TS-018 | DRAFT-2 | Positive | Log out | High | REQ-16 | `e2e/specs/login-logout.spec.ts` |
-| TS-019 | DRAFT-2 | Positive | Logged-in user cannot open Login or Register | Medium | REQ-17 | `e2e/specs/login-logout.spec.ts` |
-| TS-020 | DRAFT-3 | Security | Anonymous dashboard access redirects to Login and back | High | REQ-19, REQ-20 | `e2e/specs/dashboard-session.spec.ts` |
-| TS-021 | DRAFT-3 | Positive | Dashboard shows the profile without sensitive data | High | REQ-21 | `e2e/specs/dashboard-session.spec.ts` |
-| TS-022 | DRAFT-3 | Security | Session cookie is HttpOnly and SameSite=Lax | High | REQ-22 | `e2e/specs/dashboard-session.spec.ts` |
-| TS-023 | DRAFT-3 | Security | Session ID changes on login | High | REQ-23 | `e2e/specs/dashboard-session.spec.ts` |
-| TS-024 | DRAFT-3 | Security | Login with a tampered CSRF token is blocked | High | REQ-24 | `e2e/specs/dashboard-session.spec.ts` |
-| TS-025 | DRAFT-4 | Positive | First visit shows the banner and sets no optional cookies | High | REQ-25, REQ-26 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-026 | DRAFT-4 | Positive | Accept all cookies | High | REQ-27, REQ-31, REQ-33 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-027 | DRAFT-4 | Positive | Reject non-essential cookies | High | REQ-28 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-028 | DRAFT-4 | Positive | Customize: allow analytics only | High | REQ-29 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-029 | DRAFT-4 | Negative | Closing the dialog is not consent | High | REQ-30 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-030 | DRAFT-4 | Positive | Withdraw consent via Cookie Settings | High | REQ-32 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-031 | DRAFT-4 | Positive | Outdated policy version shows the banner again | Medium | REQ-34 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-032 | DRAFT-4 | Positive | Dashboard shows the current consent choice | Low | REQ-35 | `e2e/specs/cookie-consent.spec.ts` |
-| TS-033 | DRAFT-5 | Positive | Guest header navigation | Medium | REQ-36 | `e2e/specs/navigation.spec.ts` |
-| TS-034 | DRAFT-5 | Positive | Footer legal links open the legal pages | Medium | REQ-38 | `e2e/specs/navigation.spec.ts` |
-| TS-035 | DRAFT-5 | Negative | Unknown URL shows the 404 page | Medium | REQ-39 | `e2e/specs/navigation.spec.ts` |
-| TS-036 | DRAFT-5 | Positive | Mobile menu opens and closes | Low | REQ-37 | `e2e/specs/navigation.spec.ts` |
+| TS-001 | AQA-58 | Positive | Register with valid details | High | REQ-01, REQ-08 | `e2e/specs/registration.spec.ts` |
+| TS-002 | AQA-58 | Negative | Submit an empty registration form | High | REQ-01 | `e2e/specs/registration.spec.ts` |
+| TS-003 | AQA-58 | Validation | Reject an invalid email format | Medium | REQ-03 | `e2e/specs/registration.spec.ts` |
+| TS-004 | AQA-58 | Boundary | Reject a 7-character password | High | REQ-04 | `e2e/specs/registration.spec.ts` |
+| TS-005 | AQA-58 | Boundary | Accept an 8-character password | High | REQ-04 | `e2e/specs/registration.spec.ts` |
+| TS-006 | AQA-58 | Validation | Reject a password without a number | Medium | REQ-04 | `e2e/specs/registration.spec.ts` |
+| TS-007 | AQA-58 | Validation | Reject a confirm password that does not match | High | REQ-05 | `e2e/specs/registration.spec.ts` |
+| TS-008 | AQA-58 | Security | Reject a full name containing &lt; or &gt; | Medium | REQ-02 | `e2e/specs/registration.spec.ts` |
+| TS-009 | AQA-58 | Boundary | Reject a 1-character full name | Medium | REQ-02 | `e2e/specs/registration.spec.ts` |
+| TS-010 | AQA-58 | Negative | Reject an already-registered email in different letter case | High | REQ-07 | `e2e/specs/registration.spec.ts` |
+| TS-011 | AQA-58 | Security | Server rejects invalid input when browser validation is off | High | REQ-06 | `e2e/specs/registration.spec.ts` |
+| TS-012 | AQA-58 | Positive | Show and hide the password | Low | REQ-09 | `e2e/specs/registration.spec.ts` |
+| TS-013 | AQA-59 | Positive | Log in with valid credentials | High | REQ-12, REQ-18 | `e2e/specs/login-logout.spec.ts` |
+| TS-014 | AQA-59 | Positive | Log in with the email in different letter case | Medium | REQ-13 | `e2e/specs/login-logout.spec.ts` |
+| TS-015 | AQA-59 | Negative | Wrong password shows a generic error | High | REQ-14 | `e2e/specs/login-logout.spec.ts` |
+| TS-016 | AQA-59 | Security | Unknown email shows the same generic error | High | REQ-14 | `e2e/specs/login-logout.spec.ts` |
+| TS-017 | AQA-59 | Negative | Submit an empty login form | Medium | REQ-11 | `e2e/specs/login-logout.spec.ts` |
+| TS-018 | AQA-59 | Positive | Log out | High | REQ-16 | `e2e/specs/login-logout.spec.ts` |
+| TS-019 | AQA-59 | Positive | Logged-in user cannot open Login or Register | Medium | REQ-17 | `e2e/specs/login-logout.spec.ts` |
+| TS-020 | AQA-60 | Security | Anonymous dashboard access redirects to Login and back | High | REQ-19, REQ-20 | `e2e/specs/dashboard-session.spec.ts` |
+| TS-021 | AQA-60 | Positive | Dashboard shows the profile without sensitive data | High | REQ-21 | `e2e/specs/dashboard-session.spec.ts` |
+| TS-022 | AQA-60 | Security | Session cookie is HttpOnly and SameSite=Lax | High | REQ-22 | `e2e/specs/dashboard-session.spec.ts` |
+| TS-023 | AQA-60 | Security | Session ID changes on login | High | REQ-23 | `e2e/specs/dashboard-session.spec.ts` |
+| TS-024 | AQA-60 | Security | Login with a tampered CSRF token is blocked | High | REQ-24 | `e2e/specs/dashboard-session.spec.ts` |
+| TS-025 | AQA-61 | Positive | First visit shows the banner and sets no optional cookies | High | REQ-25, REQ-26 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-026 | AQA-61 | Positive | Accept all cookies | High | REQ-27, REQ-31, REQ-33 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-027 | AQA-61 | Positive | Reject non-essential cookies | High | REQ-28 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-028 | AQA-61 | Positive | Customize: allow analytics only | High | REQ-29 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-029 | AQA-61 | Negative | Closing the dialog is not consent | High | REQ-30 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-030 | AQA-61 | Positive | Withdraw consent via Cookie Settings | High | REQ-32 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-031 | AQA-61 | Positive | Outdated policy version shows the banner again | Medium | REQ-34 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-032 | AQA-61 | Positive | Dashboard shows the current consent choice | Low | REQ-35 | `e2e/specs/cookie-consent.spec.ts` |
+| TS-033 | AQA-62 | Positive | Guest header navigation | Medium | REQ-36 | `e2e/specs/navigation.spec.ts` |
+| TS-034 | AQA-62 | Positive | Footer legal links open the legal pages | Medium | REQ-38 | `e2e/specs/navigation.spec.ts` |
+| TS-035 | AQA-62 | Negative | Unknown URL shows the 404 page | Medium | REQ-39 | `e2e/specs/navigation.spec.ts` |
+| TS-036 | AQA-62 | Positive | Mobile menu opens and closes | Low | REQ-37 | `e2e/specs/navigation.spec.ts` |
 
 ## 4. Detailed Test Cases
 
 ### TS-001 – Register with valid details
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-1, AC-8 · **Requirement ID:** REQ-01, REQ-08 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-1, AC-8 · **Requirement ID:** REQ-01, REQ-08 · **Existing Xray coverage:** None
 
 **Preconditions:** The email is not registered.
 
@@ -125,7 +129,7 @@
 
 ### TS-002 – Submit an empty registration form
 
-**Category:** Negative · **Priority:** High · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-1 · **Requirement ID:** REQ-01 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Negative · **Priority:** High · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-1 · **Requirement ID:** REQ-01 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -136,7 +140,7 @@
 
 ### TS-003 – Reject an invalid email format
 
-**Category:** Validation · **Priority:** Medium · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-03 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Validation · **Priority:** Medium · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-03 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -146,7 +150,7 @@
 
 ### TS-004 – Reject a 7-character password
 
-**Category:** Boundary · **Priority:** High · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-04 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Boundary · **Priority:** High · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-04 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -156,7 +160,7 @@
 
 ### TS-005 – Accept an 8-character password
 
-**Category:** Boundary · **Priority:** High · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-04 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Boundary · **Priority:** High · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-04 · **Existing Xray coverage:** None
 
 **Preconditions:** The email is not registered.
 
@@ -166,7 +170,7 @@
 
 ### TS-006 – Reject a password without a number
 
-**Category:** Validation · **Priority:** Medium · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-04 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Validation · **Priority:** Medium · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-04 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -176,7 +180,7 @@
 
 ### TS-007 – Reject a confirm password that does not match
 
-**Category:** Validation · **Priority:** High · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-5 · **Requirement ID:** REQ-05 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Validation · **Priority:** High · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-5 · **Requirement ID:** REQ-05 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -186,7 +190,7 @@
 
 ### TS-008 – Reject a full name containing &lt; or &gt;
 
-**Category:** Security · **Priority:** Medium · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-2 · **Requirement ID:** REQ-02 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Security · **Priority:** Medium · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-2 · **Requirement ID:** REQ-02 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -196,7 +200,7 @@
 
 ### TS-009 – Reject a 1-character full name
 
-**Category:** Boundary · **Priority:** Medium · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-2 · **Requirement ID:** REQ-02 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Boundary · **Priority:** Medium · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-2 · **Requirement ID:** REQ-02 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -206,7 +210,7 @@
 
 ### TS-010 – Reject an already-registered email in different letter case
 
-**Category:** Negative · **Priority:** High · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-7 · **Requirement ID:** REQ-07 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Negative · **Priority:** High · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-7 · **Requirement ID:** REQ-07 · **Existing Xray coverage:** None
 
 **Preconditions:** Registered user created in a precondition
 
@@ -217,7 +221,7 @@
 
 ### TS-011 – Server rejects invalid input when browser validation is off
 
-**Category:** Security · **Priority:** High · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-06 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Security · **Priority:** High · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-06 · **Existing Xray coverage:** None
 
 **Preconditions:** JavaScript is disabled in the browser.
 
@@ -228,7 +232,7 @@
 
 ### TS-012 – Show and hide the password
 
-**Category:** Positive · **Priority:** Low · **Jira Story:** DRAFT-1 · **Acceptance Criterion:** AC-9 · **Requirement ID:** REQ-09 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Low · **Jira Story:** AQA-58 · **Acceptance Criterion:** AC-9 · **Requirement ID:** REQ-09 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -239,7 +243,7 @@
 
 ### TS-013 – Log in with valid credentials
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-2 · **Acceptance Criterion:** AC-2, AC-8 · **Requirement ID:** REQ-12, REQ-18 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-59 · **Acceptance Criterion:** AC-2, AC-8 · **Requirement ID:** REQ-12, REQ-18 · **Existing Xray coverage:** None
 
 **Preconditions:** Registered user created in a precondition
 
@@ -250,7 +254,7 @@
 
 ### TS-014 – Log in with the email in different letter case
 
-**Category:** Positive · **Priority:** Medium · **Jira Story:** DRAFT-2 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-13 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Medium · **Jira Story:** AQA-59 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-13 · **Existing Xray coverage:** None
 
 **Preconditions:** Registered user created in a precondition
 
@@ -260,7 +264,7 @@
 
 ### TS-015 – Wrong password shows a generic error
 
-**Category:** Negative · **Priority:** High · **Jira Story:** DRAFT-2 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-14 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Negative · **Priority:** High · **Jira Story:** AQA-59 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-14 · **Existing Xray coverage:** None
 
 **Preconditions:** Registered user created in a precondition
 
@@ -270,7 +274,7 @@
 
 ### TS-016 – Unknown email shows the same generic error
 
-**Category:** Security · **Priority:** High · **Jira Story:** DRAFT-2 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-14 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Security · **Priority:** High · **Jira Story:** AQA-59 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-14 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -280,7 +284,7 @@
 
 ### TS-017 – Submit an empty login form
 
-**Category:** Negative · **Priority:** Medium · **Jira Story:** DRAFT-2 · **Acceptance Criterion:** AC-1 · **Requirement ID:** REQ-11 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Negative · **Priority:** Medium · **Jira Story:** AQA-59 · **Acceptance Criterion:** AC-1 · **Requirement ID:** REQ-11 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -290,7 +294,7 @@
 
 ### TS-018 – Log out
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-2 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-16 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-59 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-16 · **Existing Xray coverage:** None
 
 **Preconditions:** User is logged in.
 
@@ -302,7 +306,7 @@
 
 ### TS-019 – Logged-in user cannot open Login or Register
 
-**Category:** Positive · **Priority:** Medium · **Jira Story:** DRAFT-2 · **Acceptance Criterion:** AC-7 · **Requirement ID:** REQ-17 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Medium · **Jira Story:** AQA-59 · **Acceptance Criterion:** AC-7 · **Requirement ID:** REQ-17 · **Existing Xray coverage:** None
 
 **Preconditions:** User is logged in.
 
@@ -313,7 +317,7 @@
 
 ### TS-020 – Anonymous dashboard access redirects to Login and back
 
-**Category:** Security · **Priority:** High · **Jira Story:** DRAFT-3 · **Acceptance Criterion:** AC-1, AC-2 · **Requirement ID:** REQ-19, REQ-20 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Security · **Priority:** High · **Jira Story:** AQA-60 · **Acceptance Criterion:** AC-1, AC-2 · **Requirement ID:** REQ-19, REQ-20 · **Existing Xray coverage:** None
 
 **Preconditions:** Registered user created in a precondition User is logged out.
 
@@ -324,7 +328,7 @@
 
 ### TS-021 – Dashboard shows the profile without sensitive data
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-3 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-21 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-60 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-21 · **Existing Xray coverage:** None (AQA-56 also starts with "TS-021" but is an unrelated test)
 
 **Preconditions:** User is logged in.
 
@@ -335,7 +339,7 @@
 
 ### TS-022 – Session cookie is HttpOnly and SameSite=Lax
 
-**Category:** Security · **Priority:** High · **Jira Story:** DRAFT-3 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-22 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Security · **Priority:** High · **Jira Story:** AQA-60 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-22 · **Existing Xray coverage:** None
 
 **Preconditions:** User is logged in.
 
@@ -346,7 +350,7 @@
 
 ### TS-023 – Session ID changes on login
 
-**Category:** Security · **Priority:** High · **Jira Story:** DRAFT-3 · **Acceptance Criterion:** AC-5 · **Requirement ID:** REQ-23 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Security · **Priority:** High · **Jira Story:** AQA-60 · **Acceptance Criterion:** AC-5 · **Requirement ID:** REQ-23 · **Existing Xray coverage:** None
 
 **Preconditions:** Registered user created in a precondition
 
@@ -357,18 +361,18 @@
 
 ### TS-024 – Login with a tampered CSRF token is blocked
 
-**Category:** Security · **Priority:** High · **Jira Story:** DRAFT-3 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-24 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Security · **Priority:** High · **Jira Story:** AQA-60 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-24 · **Existing Xray coverage:** None
 
 **Preconditions:** Registered user created in a precondition
 
 | Step | Action | Test Data | Expected Result |
 | --- | --- | --- | --- |
-| 1 | Open /login and change the hidden _csrf value | tampered-token | None |
+| 1 | Open /login and change the hidden _csrf value | tampered-token | The hidden _csrf field holds the tampered value |
 | 2 | Submit valid credentials | Registered credentials | 403 "Request blocked" page is shown; user is not logged in |
 
 ### TS-025 – First visit shows the banner and sets no optional cookies
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-1, AC-2 · **Requirement ID:** REQ-25, REQ-26 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-1, AC-2 · **Requirement ID:** REQ-25, REQ-26 · **Existing Xray coverage:** None
 
 **Preconditions:** Fresh browser with no cookies.
 
@@ -379,7 +383,7 @@
 
 ### TS-026 – Accept all cookies
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-3, AC-7, AC-9 · **Requirement ID:** REQ-27, REQ-31, REQ-33 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-3, AC-7, AC-9 · **Requirement ID:** REQ-27, REQ-31, REQ-33 · **Existing Xray coverage:** None
 
 **Preconditions:** Fresh browser with no cookies.
 
@@ -391,7 +395,7 @@
 
 ### TS-027 – Reject non-essential cookies
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-28 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-28 · **Existing Xray coverage:** None
 
 **Preconditions:** Fresh browser with no cookies.
 
@@ -402,7 +406,7 @@
 
 ### TS-028 – Customize: allow analytics only
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-5 · **Requirement ID:** REQ-29 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-5 · **Requirement ID:** REQ-29 · **Existing Xray coverage:** None
 
 **Preconditions:** Fresh browser with no cookies.
 
@@ -414,7 +418,7 @@
 
 ### TS-029 – Closing the dialog is not consent
 
-**Category:** Negative · **Priority:** High · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-30 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Negative · **Priority:** High · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-6 · **Requirement ID:** REQ-30 · **Existing Xray coverage:** None
 
 **Preconditions:** Fresh browser with no cookies.
 
@@ -425,7 +429,7 @@
 
 ### TS-030 – Withdraw consent via Cookie Settings
 
-**Category:** Positive · **Priority:** High · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-8 · **Requirement ID:** REQ-32 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** High · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-8 · **Requirement ID:** REQ-32 · **Existing Xray coverage:** None
 
 **Preconditions:** Visitor has accepted all cookies.
 
@@ -437,7 +441,7 @@
 
 ### TS-031 – Outdated policy version shows the banner again
 
-**Category:** Positive · **Priority:** Medium · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-10 · **Requirement ID:** REQ-34 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Medium · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-10 · **Requirement ID:** REQ-34 · **Existing Xray coverage:** None
 
 **Preconditions:** A cookie_consent cookie for an older policy version exists.
 
@@ -447,7 +451,7 @@
 
 ### TS-032 – Dashboard shows the current consent choice
 
-**Category:** Positive · **Priority:** Low · **Jira Story:** DRAFT-4 · **Acceptance Criterion:** AC-11 · **Requirement ID:** REQ-35 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Low · **Jira Story:** AQA-61 · **Acceptance Criterion:** AC-11 · **Requirement ID:** REQ-35 · **Existing Xray coverage:** None
 
 **Preconditions:** User is logged in and has customized: Analytics on, Marketing off.
 
@@ -457,7 +461,7 @@
 
 ### TS-033 – Guest header navigation
 
-**Category:** Positive · **Priority:** Medium · **Jira Story:** DRAFT-5 · **Acceptance Criterion:** AC-1 · **Requirement ID:** REQ-36 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Medium · **Jira Story:** AQA-62 · **Acceptance Criterion:** AC-1 · **Requirement ID:** REQ-36 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -468,7 +472,7 @@
 
 ### TS-034 – Footer legal links open the legal pages
 
-**Category:** Positive · **Priority:** Medium · **Jira Story:** DRAFT-5 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-38 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Medium · **Jira Story:** AQA-62 · **Acceptance Criterion:** AC-3 · **Requirement ID:** REQ-38 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -478,7 +482,7 @@
 
 ### TS-035 – Unknown URL shows the 404 page
 
-**Category:** Negative · **Priority:** Medium · **Jira Story:** DRAFT-5 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-39 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Negative · **Priority:** Medium · **Jira Story:** AQA-62 · **Acceptance Criterion:** AC-4 · **Requirement ID:** REQ-39 · **Existing Xray coverage:** None
 
 **Preconditions:** None (any visitor).
 
@@ -489,7 +493,7 @@
 
 ### TS-036 – Mobile menu opens and closes
 
-**Category:** Positive · **Priority:** Low · **Jira Story:** DRAFT-5 · **Acceptance Criterion:** AC-2 · **Requirement ID:** REQ-37 · **Existing Xray coverage:** Not verified (Xray not reachable)
+**Category:** Positive · **Priority:** Low · **Jira Story:** AQA-62 · **Acceptance Criterion:** AC-2 · **Requirement ID:** REQ-37 · **Existing Xray coverage:** None (AQA-56 is related but not a duplicate; see section 2)
 
 **Preconditions:** Viewport 375 × 812.
 
@@ -500,7 +504,7 @@
 
 ## 5. Coverage Summary
 
-- Existing Xray scenarios: not verified (Xray not connected).
+- Existing Xray tests in AQA: 1 (AQA-56); covers none of the 36 scenarios. Duplicates avoided: 0 needed.
 - Existing automated integration tests mapped: 9.
 - Newly proposed scenarios: 36 (Positive 17, Negative 6, Boundary 3, Validation 3, Security 7).
 - Requirements covered by new scenarios: 37 of 40.
@@ -509,8 +513,11 @@
 
 ## 6. Questions and Assumptions
 
-- DRAFT-1: Is revealing that an email is already registered acceptable given DRAFT-2 enumeration protection?
-- DRAFT-1: What is the intended registration rate limit?
-- DRAFT-2: What are the intended login throttling numbers and the session timeout?
-- DRAFT-5: What is the mobile breakpoint and which CSP directives are required?
+- AQA-58: Is revealing that an email is already registered acceptable given AQA-59 enumeration protection?
+- AQA-58: What is the intended registration rate limit?
+- AQA-58/AQA-59: Should rate limits be stated "per IP address" in both stories?
+- AQA-59: What are the intended login throttling numbers and the session timeout?
+- AQA-59: Should AC-2 say the user goes to the originally requested page when there is one (AQA-60 AC-2)? TS-013 and TS-020 assume the current behaviour (Dashboard only when nothing was requested).
+- AQA-62: What is the mobile breakpoint and which CSP directives are required?
+- AQA-62: How should the current page be highlighted? TS-033 assumes aria-current="page" (unconfirmed).
 - Scenarios TS-010 and REQ-07 assume the "email already exists" message is intended (unconfirmed).
