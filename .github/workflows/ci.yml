@@ -1,12 +1,12 @@
 name: CI
 
 on:
+  # Every pull request, whatever its target branch (this repo has no main branch yet).
   pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
+      - feature/demo-auth-site
   workflow_dispatch:
 
 permissions:
