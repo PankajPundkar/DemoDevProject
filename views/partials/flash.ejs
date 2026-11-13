@@ -4,7 +4,7 @@
 <% if (allMessages.length) { %>
   <div class="flash-stack">
     <% allMessages.forEach((m) => { %>
-      <div class="alert alert-<%= m.type %>" role="<%= m.type === 'error' ? 'alert' : 'status' %>">
+      <div class="alert alert-<%= m.type %>" data-testid="flash-message" role="<%= m.type === 'error' ? 'alert' : 'status' %>">
         <span class="alert__text"><%= m.text %></span>
         <button type="button" class="alert__close" data-dismiss-alert aria-label="Dismiss message">&times;</button>
       </div>

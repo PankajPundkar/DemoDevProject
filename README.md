@@ -97,6 +97,48 @@ The tests use Node's built-in test runner with `tsx` and `supertest`. Each test 
 - login throttling,
 - atomic, concurrent-safe JSON writes.
 
+### End-to-end browser tests (Playwright)
+
+The `e2e/` folder holds Playwright browser tests for every user-facing flow: registration, login and logout, the protected dashboard, session security, cookie consent, navigation and error pages. They follow the Page Object Model:
+
+- `e2e/pages/`: page objects (locators and actions only)
+- `e2e/specs/`: one spec per user story (scenarios and assertions)
+- `e2e/fixtures.ts`: page objects, ready-made users and the consent setup as Playwright fixtures
+
+First-time setup:
+
+```bash
+npm install
+npx playwright install chromium
+```
+
+| Command | What it does |
+|---|---|
+| `npm run test:e2e` | Runs all browser tests (headless) |
+| `npm run test:e2e:headed` | Same, with a visible browser |
+| `npm run test:e2e:ui` | Playwright UI mode, for picking and debugging tests |
+| `npm run test:e2e:report` | Opens the last HTML report |
+| `npm run typecheck:e2e` | Type-checks the test code |
+| `npx playwright test --grep @TS-013` | Runs one scenario (each test is tagged with its scenario ID and story) |
+
+Playwright starts its **own** copy of the app on port 3100 (`e2e/server.ts`). It uses a throw-away data folder (`tests/.tmp/e2e-data`) and raised rate limits, so your `data/` folder and your dev server on port 3000 are never touched. To test a server that is already running, set `E2E_BASE_URL`, for example `E2E_BASE_URL=http://localhost:3000 npm run test:e2e`. In that case the real rate limits apply: about 10 failed logins per 15 minutes.
+
+Reports: `playwright-report/` (HTML) and `test-results/junit-results.xml` (JUnit, the same format mcp-qa-lab uses for Xray imports).
+
+### QA documents and traceability
+
+The `qa/` folder holds the output of the mcp-qa-lab agent pipeline for this app:
+
+| File | Agent | Content |
+|---|---|---|
+| `01-user-stories.md` | (input) | Draft user stories DRAFT-1 to DRAFT-5 with acceptance criteria |
+| `02-story-review.md` | Story Review Agent | Clarity, testability and open questions per story |
+| `03-requirements.md` / `.json` | Requirements Agent | 40 traceable requirements (REQ-01 to REQ-40) |
+| `04-test-design.md` | Test Design Agent | 36 scenarios (TS-001 to TS-036) with steps and expected results |
+| `05-xray-creation-preview.md` / `05-xray-payloads.json` | Xray Test Creation Agent | Preview and exact `create_xray_manual_test` payloads (nothing created yet) |
+
+Each Playwright test is named and tagged with its scenario ID, so `TS-013` in the test design is `TS-013` in the report. Once the scenarios exist in Xray, map them in `e2e/xray-test-keys.json` (`{ "TS-013": "AQA-123" }`). The JUnit report then carries a `test_key` for each test, ready for import into Xray.
+
 ### Manual test checklist
 
 1. Open http://localhost:3000. The cookie banner appears. Click **Reject non-essential**. In DevTools → Application → Cookies, only `cookie_consent` (and `sid`) exist.
@@ -120,6 +162,7 @@ The tests use Node's built-in test runner with `tsx` and `supertest`. Each test 
 | `BCRYPT_ROUNDS` | `12` | bcrypt cost factor, clamped to 4–15 |
 | `LOGIN_RATE_LIMIT_MAX` | `10` | Failed login attempts allowed per IP per window |
 | `LOGIN_RATE_LIMIT_WINDOW_MINUTES` | `15` | Throttling window |
+| `REGISTER_RATE_LIMIT_MAX` | `20` | Registration attempts allowed per IP per hour |
 | `DATA_DIR` | `data` | Folder holding the JSON files. Relative to the project root, or absolute. |
 | `COOKIE_POLICY_VERSION` | `1` | Bump this to ask every visitor for consent again |
 | `SITE_NAME` | `DemoSite` | Displayed site name |
@@ -157,6 +200,9 @@ The tests use Node's built-in test runner with `tsx` and `supertest`. Each test 
 │   ├── cookie-consent.json     # { "consents": [] } - empty template
 │   └── sessions.json           # created at runtime (git-ignored)
 ├── tests/                      # node:test + supertest
+├── e2e/                        # Playwright browser tests (pages/, specs/, fixtures)
+├── qa/                         # Stories, requirements, test design, Xray preview
+├── playwright.config.ts
 ├── .env.example
 ├── package.json
 └── tsconfig.json

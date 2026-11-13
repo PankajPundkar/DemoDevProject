@@ -30,7 +30,7 @@
 
       <% if (user) { %>
         <div class="nav-user">
-          <span class="user-chip" title="<%= user.email %>">
+          <span class="user-chip" title="<%= user.email %>" data-testid="user-chip">
             <span class="user-chip__avatar" aria-hidden="true"><%= initials %></span>
             <span class="user-chip__text">
               <span class="user-chip__name"><%= user.fullName %></span>

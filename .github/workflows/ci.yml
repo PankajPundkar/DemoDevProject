@@ -1,0 +1,81 @@
+name: CI
+
+on:
+  # Every pull request, whatever its target branch (this repo has no main branch yet).
+  pull_request:
+  push:
+    branches:
+      - main
+      - feature/demo-auth-site
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Type-check, unit/integration tests and build
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type-check app
+        run: npm run typecheck
+
+      - name: Type-check E2E tests
+        run: npm run typecheck:e2e
+
+      - name: Unit and integration tests
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+  e2e:
+    name: Playwright E2E tests
+    runs-on: ubuntu-24.04
+    needs: build-and-test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium with dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-html-report
+          path: playwright-report/
+          retention-days: 14
+
+      - name: Upload Playwright JUnit report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-junit-report
+          path: test-results/junit-results.xml
+          retention-days: 14

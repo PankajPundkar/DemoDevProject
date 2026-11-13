@@ -4,7 +4,7 @@
     <p class="auth-card__subtitle">Your account is activated immediately - no email verification needed.</p>
 
     <% if (locals.formError) { %>
-      <div class="alert alert-error" role="alert" id="form-error"><%= formError %></div>
+      <div class="alert alert-error" role="alert" id="form-error" data-testid="form-error"><%= formError %></div>
     <% } %>
 
     <form method="post" action="/register" class="form" data-validate="register" novalidate>

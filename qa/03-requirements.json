@@ -1,0 +1,715 @@
+{
+  "stories": [
+    {
+      "key": "DRAFT-1",
+      "summary": "User registration",
+      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+    },
+    {
+      "key": "DRAFT-2",
+      "summary": "User login and logout",
+      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+    },
+    {
+      "key": "DRAFT-3",
+      "summary": "Protected dashboard and session security",
+      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+    },
+    {
+      "key": "DRAFT-4",
+      "summary": "GDPR cookie consent",
+      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+    },
+    {
+      "key": "DRAFT-5",
+      "summary": "Site navigation, legal pages and error pages",
+      "source": "Draft (qa/01-user-stories.md) - not yet in Jira"
+    }
+  ],
+  "requirements": [
+    {
+      "requirementId": "REQ-01",
+      "requirementDescription": "The Register page shows Full name, Email address, Password and Confirm password; all are required.",
+      "sourceAcceptanceCriterion": "AC-1",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-02",
+      "requirementDescription": "Full name is 2–100 characters after trimming and contains no \"<\" or \">\".",
+      "sourceAcceptanceCriterion": "AC-2",
+      "requirementType": "Validation Rule",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-03",
+      "requirementDescription": "Email address matches name@domain.tld, has no spaces and is at most 254 characters.",
+      "sourceAcceptanceCriterion": "AC-3",
+      "requirementType": "Validation Rule",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-04",
+      "requirementDescription": "Password is at least 8 characters, at most 72 bytes, and has at least one letter and one number; the rule is shown as a hint.",
+      "sourceAcceptanceCriterion": "AC-4",
+      "requirementType": "Validation Rule",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [
+        "72 bytes vs 72 characters for non-ASCII passwords."
+      ],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-05",
+      "requirementDescription": "Confirm password must equal Password.",
+      "sourceAcceptanceCriterion": "AC-5",
+      "requirementType": "Validation Rule",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-06",
+      "requirementDescription": "The server re-validates every registration field independently of browser validation.",
+      "sourceAcceptanceCriterion": "AC-6",
+      "requirementType": "Security",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-07",
+      "requirementDescription": "An already-registered email (any letter case) is rejected with \"An account with this email already exists. Try logging in instead.\"",
+      "sourceAcceptanceCriterion": "AC-7",
+      "requirementType": "Business Rule",
+      "priority": "High",
+      "testability": "Needs clarification",
+      "ambiguities": [
+        "Conflicts with enumeration protection in DRAFT-2 AC-4."
+      ],
+      "assumptions": [
+        "Assumption (unconfirmed): the product owner accepts revealing that an email is registered, mitigated by rate limiting."
+      ],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-08",
+      "requirementDescription": "Successful registration creates an active account, redirects to Login and shows \"Your account has been created and is active. Please log in.\"",
+      "sourceAcceptanceCriterion": "AC-8",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-09",
+      "requirementDescription": "Password fields have a Show/Hide toggle.",
+      "sourceAcceptanceCriterion": "AC-9",
+      "requirementType": "Functional",
+      "priority": "Low",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-10",
+      "requirementDescription": "Registration attempts are rate-limited per network.",
+      "sourceAcceptanceCriterion": "AC-10",
+      "requirementType": "Security",
+      "priority": "Medium",
+      "testability": "Needs clarification",
+      "ambiguities": [
+        "Limit and window are not stated."
+      ],
+      "assumptions": [
+        "Assumption (unconfirmed): 20 attempts per hour per IP, as currently coded."
+      ],
+      "traceability": {
+        "storyKey": "DRAFT-1",
+        "storySummary": "User registration"
+      }
+    },
+    {
+      "requirementId": "REQ-11",
+      "requirementDescription": "The Login page has required Email address and Password fields.",
+      "sourceAcceptanceCriterion": "AC-1",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-12",
+      "requirementDescription": "Valid credentials log the user in, open the Dashboard and show \"Welcome back, <full name>!\".",
+      "sourceAcceptanceCriterion": "AC-2",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-13",
+      "requirementDescription": "Email matching at login ignores letter case.",
+      "sourceAcceptanceCriterion": "AC-3",
+      "requirementType": "Business Rule",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-14",
+      "requirementDescription": "Wrong password and unknown email both show \"Invalid email or password.\"",
+      "sourceAcceptanceCriterion": "AC-4",
+      "requirementType": "Security",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-15",
+      "requirementDescription": "Too many failed logins from one IP are blocked for a time window.",
+      "sourceAcceptanceCriterion": "AC-5",
+      "requirementType": "Security",
+      "priority": "High",
+      "testability": "Needs clarification",
+      "ambiguities": [
+        "Limit and window not stated."
+      ],
+      "assumptions": [
+        "Assumption (unconfirmed): 10 failed attempts per 15 minutes, as currently coded."
+      ],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-16",
+      "requirementDescription": "Logout ends the session, returns to Home and shows \"You have been logged out.\"",
+      "sourceAcceptanceCriterion": "AC-6",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-17",
+      "requirementDescription": "A logged-in user opening /login or /register is redirected to the Dashboard with \"You are already logged in.\"",
+      "sourceAcceptanceCriterion": "AC-7",
+      "requirementType": "Functional",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-18",
+      "requirementDescription": "While logged in, the header shows name, email, initials and a Log out button instead of Login/Register.",
+      "sourceAcceptanceCriterion": "AC-8",
+      "requirementType": "Functional",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-2",
+        "storySummary": "User login and logout"
+      }
+    },
+    {
+      "requirementId": "REQ-19",
+      "requirementDescription": "Anonymous visitors to /dashboard are redirected to Login with \"Please log in to view that page.\"",
+      "sourceAcceptanceCriterion": "AC-1",
+      "requirementType": "Security",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-3",
+        "storySummary": "Protected dashboard and session security"
+      }
+    },
+    {
+      "requirementId": "REQ-20",
+      "requirementDescription": "After login the user returns to the page originally requested (same-site paths only).",
+      "sourceAcceptanceCriterion": "AC-2",
+      "requirementType": "Functional",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-3",
+        "storySummary": "Protected dashboard and session security"
+      }
+    },
+    {
+      "requirementId": "REQ-21",
+      "requirementDescription": "The Dashboard shows full name, email, status \"Active\" and member-since date, and never the password or hash.",
+      "sourceAcceptanceCriterion": "AC-3",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-3",
+        "storySummary": "Protected dashboard and session security"
+      }
+    },
+    {
+      "requirementId": "REQ-22",
+      "requirementDescription": "The session cookie is HttpOnly and SameSite=Lax.",
+      "sourceAcceptanceCriterion": "AC-4",
+      "requirementType": "Security",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-3",
+        "storySummary": "Protected dashboard and session security"
+      }
+    },
+    {
+      "requirementId": "REQ-23",
+      "requirementDescription": "A new session ID is issued on login.",
+      "sourceAcceptanceCriterion": "AC-5",
+      "requirementType": "Security",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-3",
+        "storySummary": "Protected dashboard and session security"
+      }
+    },
+    {
+      "requirementId": "REQ-24",
+      "requirementDescription": "State-changing requests without a valid CSRF token are rejected.",
+      "sourceAcceptanceCriterion": "AC-6",
+      "requirementType": "Security",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-3",
+        "storySummary": "Protected dashboard and session security"
+      }
+    },
+    {
+      "requirementId": "REQ-25",
+      "requirementDescription": "A first visit shows a banner with Accept all, Reject non-essential and Customize.",
+      "sourceAcceptanceCriterion": "AC-1",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [
+        "\"Equally prominent\" is subjective."
+      ],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-26",
+      "requirementDescription": "No optional cookie or optional script before the visitor chooses.",
+      "sourceAcceptanceCriterion": "AC-2",
+      "requirementType": "Business Rule",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-27",
+      "requirementDescription": "Accept all enables Analytics and Marketing and their cookies are set.",
+      "sourceAcceptanceCriterion": "AC-3",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-28",
+      "requirementDescription": "Reject non-essential keeps all optional cookies off.",
+      "sourceAcceptanceCriterion": "AC-4",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-29",
+      "requirementDescription": "The preferences dialog shows Strictly necessary always on and disabled, and optional categories unticked by default.",
+      "sourceAcceptanceCriterion": "AC-5",
+      "requirementType": "Business Rule",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-30",
+      "requirementDescription": "Closing the dialog without saving is not consent; the banner stays.",
+      "sourceAcceptanceCriterion": "AC-6",
+      "requirementType": "Business Rule",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-31",
+      "requirementDescription": "The choice is stored in cookie_consent for 180 days and the banner does not reappear.",
+      "sourceAcceptanceCriterion": "AC-7",
+      "requirementType": "Functional",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-32",
+      "requirementDescription": "Cookie Settings in the footer lets the visitor change or withdraw consent; withdrawn cookies are deleted immediately.",
+      "sourceAcceptanceCriterion": "AC-8",
+      "requirementType": "Functional",
+      "priority": "High",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-33",
+      "requirementDescription": "Each decision is recorded on the server anonymously.",
+      "sourceAcceptanceCriterion": "AC-9",
+      "requirementType": "Business Rule",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-34",
+      "requirementDescription": "A policy version change invalidates earlier consent and the banner reappears.",
+      "sourceAcceptanceCriterion": "AC-10",
+      "requirementType": "Business Rule",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-35",
+      "requirementDescription": "The Dashboard shows Analytics and Marketing as Allowed, Refused or Not set.",
+      "sourceAcceptanceCriterion": "AC-11",
+      "requirementType": "Functional",
+      "priority": "Low",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-4",
+        "storySummary": "GDPR cookie consent"
+      }
+    },
+    {
+      "requirementId": "REQ-36",
+      "requirementDescription": "The header shows navigation for the current auth state and highlights the current page.",
+      "sourceAcceptanceCriterion": "AC-1",
+      "requirementType": "Functional",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-5",
+        "storySummary": "Site navigation, legal pages and error pages"
+      }
+    },
+    {
+      "requirementId": "REQ-37",
+      "requirementDescription": "On small screens a menu button opens and closes the navigation.",
+      "sourceAcceptanceCriterion": "AC-2",
+      "requirementType": "Functional",
+      "priority": "Low",
+      "testability": "Needs clarification",
+      "ambiguities": [
+        "Breakpoint not stated."
+      ],
+      "assumptions": [
+        "Assumption (unconfirmed): below 768 px, as currently coded."
+      ],
+      "traceability": {
+        "storyKey": "DRAFT-5",
+        "storySummary": "Site navigation, legal pages and error pages"
+      }
+    },
+    {
+      "requirementId": "REQ-38",
+      "requirementDescription": "The footer links to Privacy Policy, Cookie Policy, Terms of Use and Cookie Settings on every page.",
+      "sourceAcceptanceCriterion": "AC-3",
+      "requirementType": "Functional",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-5",
+        "storySummary": "Site navigation, legal pages and error pages"
+      }
+    },
+    {
+      "requirementId": "REQ-39",
+      "requirementDescription": "An unknown URL shows \"Page not found\" with a link back to Home.",
+      "sourceAcceptanceCriterion": "AC-4",
+      "requirementType": "Functional",
+      "priority": "Medium",
+      "testability": "Testable",
+      "ambiguities": [],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-5",
+        "storySummary": "Site navigation, legal pages and error pages"
+      }
+    },
+    {
+      "requirementId": "REQ-40",
+      "requirementDescription": "Pages are served with security headers including a strict Content Security Policy.",
+      "sourceAcceptanceCriterion": "AC-5",
+      "requirementType": "Security",
+      "priority": "Medium",
+      "testability": "Needs clarification",
+      "ambiguities": [
+        "\"Strict\" not defined."
+      ],
+      "assumptions": [],
+      "traceability": {
+        "storyKey": "DRAFT-5",
+        "storySummary": "Site navigation, legal pages and error pages"
+      }
+    }
+  ],
+  "businessRules": [
+    {
+      "requirementId": "REQ-07",
+      "rule": "An already-registered email (any letter case) is rejected with \"An account with this email already exists. Try logging in instead.\"",
+      "sourceAcceptanceCriterion": "AC-7",
+      "storyKey": "DRAFT-1",
+      "priority": "High"
+    },
+    {
+      "requirementId": "REQ-13",
+      "rule": "Email matching at login ignores letter case.",
+      "sourceAcceptanceCriterion": "AC-3",
+      "storyKey": "DRAFT-2",
+      "priority": "Medium"
+    },
+    {
+      "requirementId": "REQ-26",
+      "rule": "No optional cookie or optional script before the visitor chooses.",
+      "sourceAcceptanceCriterion": "AC-2",
+      "storyKey": "DRAFT-4",
+      "priority": "High"
+    },
+    {
+      "requirementId": "REQ-29",
+      "rule": "The preferences dialog shows Strictly necessary always on and disabled, and optional categories unticked by default.",
+      "sourceAcceptanceCriterion": "AC-5",
+      "storyKey": "DRAFT-4",
+      "priority": "High"
+    },
+    {
+      "requirementId": "REQ-30",
+      "rule": "Closing the dialog without saving is not consent; the banner stays.",
+      "sourceAcceptanceCriterion": "AC-6",
+      "storyKey": "DRAFT-4",
+      "priority": "High"
+    },
+    {
+      "requirementId": "REQ-33",
+      "rule": "Each decision is recorded on the server anonymously.",
+      "sourceAcceptanceCriterion": "AC-9",
+      "storyKey": "DRAFT-4",
+      "priority": "Medium"
+    },
+    {
+      "requirementId": "REQ-34",
+      "rule": "A policy version change invalidates earlier consent and the banner reappears.",
+      "sourceAcceptanceCriterion": "AC-10",
+      "storyKey": "DRAFT-4",
+      "priority": "Medium"
+    }
+  ],
+  "validationRules": [
+    {
+      "requirementId": "REQ-02",
+      "rule": "Full name is 2–100 characters after trimming and contains no \"<\" or \">\".",
+      "sourceAcceptanceCriterion": "AC-2",
+      "storyKey": "DRAFT-1",
+      "priority": "High"
+    },
+    {
+      "requirementId": "REQ-03",
+      "rule": "Email address matches name@domain.tld, has no spaces and is at most 254 characters.",
+      "sourceAcceptanceCriterion": "AC-3",
+      "storyKey": "DRAFT-1",
+      "priority": "High"
+    },
+    {
+      "requirementId": "REQ-04",
+      "rule": "Password is at least 8 characters, at most 72 bytes, and has at least one letter and one number; the rule is shown as a hint.",
+      "sourceAcceptanceCriterion": "AC-4",
+      "storyKey": "DRAFT-1",
+      "priority": "High"
+    },
+    {
+      "requirementId": "REQ-05",
+      "rule": "Confirm password must equal Password.",
+      "sourceAcceptanceCriterion": "AC-5",
+      "storyKey": "DRAFT-1",
+      "priority": "High"
+    }
+  ],
+  "ambiguities": [
+    "REQ-04: 72 bytes vs 72 characters for non-ASCII passwords.",
+    "REQ-07: Conflicts with enumeration protection in DRAFT-2 AC-4.",
+    "REQ-10: Limit and window are not stated.",
+    "REQ-15: Limit and window not stated.",
+    "REQ-25: \"Equally prominent\" is subjective.",
+    "REQ-37: Breakpoint not stated.",
+    "REQ-40: \"Strict\" not defined."
+  ],
+  "assumptions": [
+    "REQ-07: Assumption (unconfirmed): the product owner accepts revealing that an email is registered, mitigated by rate limiting.",
+    "REQ-10: Assumption (unconfirmed): 20 attempts per hour per IP, as currently coded.",
+    "REQ-15: Assumption (unconfirmed): 10 failed attempts per 15 minutes, as currently coded.",
+    "REQ-37: Assumption (unconfirmed): below 768 px, as currently coded."
+  ],
+  "questions": [
+    "DRAFT-1: Is revealing that an email is already registered acceptable given DRAFT-2 enumeration protection?",
+    "DRAFT-1: What is the intended registration rate limit?",
+    "DRAFT-2: What are the intended login throttling numbers and the session timeout?",
+    "DRAFT-5: What is the mobile breakpoint and which CSP directives are required?"
+  ]
+}
