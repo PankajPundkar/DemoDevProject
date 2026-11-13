@@ -149,8 +149,11 @@ This repo includes the same QA agents and MCP servers as [mcp-qa-lab](https://gi
 | MCP server | What it gives the agents |
 |---|---|
 | `atlassian` | Jira, used to read and create stories (Atlassian's hosted server, sign in on first use) |
+| `github` | Pull requests, reviews, issues and Actions runs, used by the GitHub and PR Review agents (GitHub's hosted server; needs a `GITHUB_PAT` environment variable, see below) |
 | `playwright` | A browser the agent can drive (`@playwright/mcp`) |
 | `xray` | Search, read and create Xray tests. The code is in `tools/xray-mcp/server.ts`; credentials come from `.env` |
+
+**GitHub server token:** the `github` server reads a token from the `GITHUB_PAT` environment variable on your machine; it is never stored in the repo. If you are signed in to the GitHub CLI, you can reuse its token (PowerShell): `[Environment]::SetEnvironmentVariable("GITHUB_PAT", (gh auth token), "User")`, then restart VS Code. Without `GITHUB_PAT` only the `github` server fails to connect; the others are unaffected.
 
 The Xray server's tools: `get_xray_auth_status`, `search_xray_tests`, `get_xray_test`, `get_xray_test_details`, `get_expanded_test`, `get_xray_test_plan_tests`, `resolve_xray_test_keys` (all read-only) and `create_xray_manual_test` (write). Fill in the `XRAY_*` values in `.env` first, then check them with `npm run xray:verify-auth`.
 
