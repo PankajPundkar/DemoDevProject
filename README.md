@@ -99,11 +99,11 @@ The tests use Node's built-in test runner with `tsx` and `supertest`. Each test 
 
 ### End-to-end browser tests (Playwright)
 
-The `e2e/` folder holds Playwright browser tests for every user-facing flow: registration, login and logout, the protected dashboard, session security, cookie consent, navigation and error pages. They follow the Page Object Model:
+The `e2e/` folder holds the Playwright setup for browser tests. It has no tests yet: `pages/` and `specs/` are empty, ready for the next feature. Tests follow the Page Object Model:
 
 - `e2e/pages/`: page objects (locators and actions only)
 - `e2e/specs/`: one spec per user story (scenarios and assertions)
-- `e2e/fixtures.ts`: page objects, ready-made users and the consent setup as Playwright fixtures
+- `e2e/fixtures.ts`: ready-made users (`registeredUser`, `loggedInUser`) and the `consent` option as Playwright fixtures; add page-object fixtures here as you create page objects
 
 First-time setup:
 
@@ -114,12 +114,12 @@ npx playwright install chromium
 
 | Command | What it does |
 |---|---|
-| `npm run test:e2e` | Runs all browser tests (headless) |
+| `npm run test:e2e` | Runs all browser tests (headless); passes when there are none yet |
 | `npm run test:e2e:headed` | Same, with a visible browser |
 | `npm run test:e2e:ui` | Playwright UI mode, for picking and debugging tests |
 | `npm run test:e2e:report` | Opens the last HTML report |
 | `npm run typecheck:e2e` | Type-checks the test code |
-| `npx playwright test --grep @TS-013` | Runs one scenario (each test is tagged with its scenario ID and story) |
+| `npx playwright test --grep @<scenario-id>` | Runs one scenario (each test is tagged with its scenario ID and story) |
 
 Playwright starts its **own** copy of the app on port 3100 (`e2e/server.ts`). It uses a throw-away data folder (`tests/.tmp/e2e-data`) and raised rate limits, so your `data/` folder and your dev server on port 3000 are never touched. To test a server that is already running, set `E2E_BASE_URL`, for example `E2E_BASE_URL=http://localhost:3000 npm run test:e2e`. In that case the real rate limits apply: about 10 failed logins per 15 minutes.
 
@@ -127,17 +127,17 @@ Reports: `playwright-report/` (HTML) and `test-results/junit-results.xml` (JUnit
 
 ### QA documents and traceability
 
-The `qa/` folder holds the output of the mcp-qa-lab agent pipeline for this app:
+The `qa/` folder holds the output of the mcp-qa-lab agent pipeline for the feature being worked on. It is empty until the pipeline runs for the next feature. The agents write:
 
 | File | Agent | Content |
 |---|---|---|
-| `01-user-stories.md` | (input) | User stories AQA-58 to AQA-62 with acceptance criteria |
+| `01-user-stories.md` | (input) | User stories with acceptance criteria |
 | `02-story-review.md` | Story Review Agent | Clarity, testability and open questions per story |
-| `03-requirements.md` / `.json` | Requirements Agent | 40 traceable requirements (REQ-01 to REQ-40) |
-| `04-test-design.md` | Test Design Agent | 36 scenarios (TS-001 to TS-036) with steps and expected results |
-| `05-xray-creation-preview.md` / `05-xray-payloads.json` | Xray Test Creation Agent | Preview and exact `create_xray_manual_test` payloads (nothing created yet) |
+| `03-requirements.md` / `.json` | Requirements Agent | Traceable requirements (REQ-xx) |
+| `04-test-design.md` | Test Design Agent | Test scenarios (TS-xxx) with steps and expected results |
+| `05-xray-creation-preview.md` / `05-xray-payloads.json` | Xray Test Creation Agent | Preview and exact `create_xray_manual_test` payloads |
 
-Each Playwright test is named and tagged with its scenario ID, so `TS-013` in the test design is `TS-013` in the report. Once the scenarios exist in Xray, map them in `e2e/xray-test-keys.json` (`{ "TS-013": "AQA-123" }`). The JUnit report then carries a `test_key` for each test, ready for import into Xray.
+Name and tag each Playwright test with its scenario ID using `scenario('TS-xxx', story, requirements)` from `e2e/support/scenarios.ts`, so a scenario in the test design has the same ID in the report. Once the scenarios exist in Xray, map them in `e2e/xray-test-keys.json` (`{ "TS-001": "<Xray test key>" }`; it is `{}` until then). The JUnit report then carries a `test_key` for each test, ready for import into Xray.
 
 ### AI agents and MCP servers
 
@@ -231,11 +231,11 @@ The Xray server's tools: `get_xray_auth_status`, `search_xray_tests`, `get_xray_
 │   ├── cookie-consent.json     # { "consents": [] } - empty template
 │   └── sessions.json           # created at runtime (git-ignored)
 ├── tests/                      # node:test + supertest
-├── e2e/                        # Playwright browser tests (pages/, specs/, fixtures)
-├── qa/                         # Stories, requirements, test design, Xray preview
+├── e2e/                        # Playwright setup: fixtures, support; pages/ and specs/ empty
+├── qa/                         # Agent pipeline outputs (empty until the next feature)
 ├── tools/                      # Xray client, Xray MCP server and their tests
 ├── .github/                    # Copilot agents, instructions, CI workflow
-├── .mcp.json                   # MCP servers: atlassian, playwright, xray
+├── .mcp.json                   # MCP servers: atlassian, github, playwright, xray
 ├── playwright.config.ts
 ├── .env.example
 ├── package.json
